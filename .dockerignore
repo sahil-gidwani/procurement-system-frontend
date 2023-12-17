@@ -1,0 +1,39 @@
+# Ignore node_modules folder, as dependencies should be installed during the build
+node_modules
+
+# Ignore build artifacts and development files
+build
+dist
+*.log
+*.pid
+.DS_Store
+npm-debug.log
+yarn-error.log
+
+# Ignore version control files
+.git
+.gitignore
+.github/
+
+# Ignore all .env files
+*.env
+
+# Ignore Docker-related files not needed in the final image
+.dockerignore
+Dockerfile*
+.dockerignore*
+.docker
+
+# Ignore other development and editor-specific files
+.vscode
+.idea
+*.swp
+*.swo
+*.swn
+*.swm
+*.bak
+*.tmp
+*.sublime-workspace
+*.sublime-project
+*.log
+*.tmp
