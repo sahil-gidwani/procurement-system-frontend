@@ -22,9 +22,8 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: |
-          npm install
+      - name: Install Prettier
+        run: npm install prettier
 
       - name: Run Prettier (Check)
         run: npm run format-check || true
