@@ -26,6 +26,20 @@ jobs:
         run: |
           npm install
 
-      - name: Run Prettier
+      - name: Run Prettier (Check)
+        run: npm run format-check
+
+      - name: Run Prettier (Fix)
+        run: npm run format
+
+      - name: Commit changes
         run: |
-          npm run format-check
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto-format code with Prettier" || echo "No changes to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
