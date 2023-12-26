@@ -1,17 +1,24 @@
 import { useSelector } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-    const user = useSelector((state) => state.auth.user);
+const ProtectedRoute = ({ role=null }) => {
+  const user = useSelector((state) => state.auth.user);
 
-    return (
-        <Route
-            {...rest}
-            render={(props) =>
-                user ? <Component {...props} /> : <Redirect to="/login" />
-            }
-        />
-    );
-}
+  let isAuthorized = false;
+
+  switch (role) {
+    case 'admin':
+      isAuthorized = user?.is_superuser;
+      break;
+    case 'procurement_officer':
+    case 'vendor':
+        isAuthorized = user.user_role === role;
+        break;
+    default:
+        isAuthorized = user !== null;
+  }
+
+  return isAuthorized ? <Outlet /> : <Navigate to="/login" />;
+};
 
 export default ProtectedRoute;

@@ -1,19 +1,21 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 
 const initialState = {
-    tokens: localStorage.getItem('tokens') || null,
-    user: null,
+    tokens: JSON.parse(localStorage.getItem('tokens')) || null,
+    user: jwtDecode(JSON.parse(localStorage.getItem('tokens')).access) || null,
     loading: false,
     error: ''
 }
+
+const baseURL = process.env.REACT_APP_API_URL;
 
 export const login = createAsyncThunk(
     'auth/login',
     async (data, thunkAPI) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', data);
+            const response = await axios.post(`${baseURL}accounts/token/`, data);
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response ? error.response.data : 'Something went wrong');
@@ -44,8 +46,8 @@ const authSlice = createSlice({
         builder.addCase(login.fulfilled, (state, action) => {
             state.loading = false;
             state.tokens = action.payload;
-            state.user = jwt_decode(action.payload);
-            localStorage.setItem('tokens', action.payload);
+            state.user = jwtDecode(action.payload.access);
+            localStorage.setItem('tokens', JSON.stringify(action.payload));
         });
         builder.addCase(login.rejected, (state, action) => {
             state.loading = false;
@@ -54,5 +56,5 @@ const authSlice = createSlice({
     }
 });
 
-export const { logout } = authSlice.actions;
+export const { setTokens, setUser, logout } = authSlice.actions;
 export default authSlice.reducer;

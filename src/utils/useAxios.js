@@ -1,5 +1,5 @@
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser, setTokens } from "../features/auth/authSlice";
@@ -16,7 +16,7 @@ const useAxios = () => {
     });
 
     axiosInstance.interceptors.request.use(async (req) => {
-        const user = jwt_decode(authTokens.access);
+        const user = jwtDecode(authTokens.access);
         const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
 
         if (!isExpired) return req;
@@ -28,7 +28,7 @@ const useAxios = () => {
         localStorage.setItem("tokens", JSON.stringify(response.data));
 
         dispatch(setTokens(response.data));
-        dispatch(setUser(jwt_decode(response.data.access)));
+        dispatch(setUser(jwtDecode(response.data.access)));
 
         req.headers.Authorization = `Bearer ${response.data.access}`;
         return req;
