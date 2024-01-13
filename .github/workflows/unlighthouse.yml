@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  demo:
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,7 +13,7 @@ jobs:
         run: npm install -g @unlighthouse/cli puppeteer
 
       - name: Unlighthouse assertions and client
-        run: unlighthouse-ci --site https://smart-procurement-system.netlify.app/ --build-static
+        run: unlighthouse-ci --build-static
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
