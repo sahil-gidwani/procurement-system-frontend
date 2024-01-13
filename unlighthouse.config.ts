@@ -1,5 +1,6 @@
 export default {
-    site: 'https://smart-procurement-system.netlify.app/',
+    site: 'smart-procurement-system.netlify.app',
+    debug: true,
     scanner: {
       // run lighthouse for each URL 3 times
       samples: 3,
@@ -8,7 +9,6 @@ export default {
       // enable the throttling mode
       throttle: true,
     },
-    debug: true,
     // hooks: {
     //   async authenticate(page) {
     //     // login to the page
