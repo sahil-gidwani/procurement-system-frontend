@@ -1,0 +1,22 @@
+name: Audit Site and Generate Report
+
+on:
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm install -g @unlighthouse/cli puppeteer
+
+      - name: Unlighthouse assertions and client
+        run: unlighthouse-ci --build-static
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .unlighthouse
