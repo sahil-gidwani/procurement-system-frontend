@@ -2,12 +2,18 @@ import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { jwtDecode } from 'jwt-decode';
 
+let storedTokens = null;
+
+if (localStorage) {
+    storedTokens = JSON.parse(localStorage.getItem('tokens'));
+}
+
 const initialState = {
-    tokens: JSON.parse(localStorage.getItem('tokens')) || null,
-    user: jwtDecode(JSON.parse(localStorage.getItem('tokens')).access) || null,
+    tokens: storedTokens || null,
+    user: storedTokens ? jwtDecode(storedTokens.access) : null,
     loading: false,
     error: ''
-}
+};
 
 const baseURL = process.env.REACT_APP_API_URL;
 
@@ -15,7 +21,7 @@ export const login = createAsyncThunk(
     'auth/login',
     async (data, thunkAPI) => {
         try {
-            const response = await axios.post(`${baseURL}accounts/token/`, data);
+            const response = await axios.post(`${baseURL}/accounts/token/`, data);
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response ? error.response.data : 'Something went wrong');
@@ -35,7 +41,8 @@ const authSlice = createSlice({
         },
         logout: (state) => {
             localStorage.removeItem('tokens');
-            Object.assign(state, initialState);
+            state.tokens = null;
+            state.user = null;
         }
     },
     extraReducers: builder => {

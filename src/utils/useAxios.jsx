@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser, setTokens } from "../features/auth/authSlice";
+import { setUser, setTokens } from "../redux/auth/authSlice";
 
 const baseURL = process.env.REACT_APP_API_URL;
 

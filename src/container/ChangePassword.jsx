@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import useAxios from "../../utils/useAxios";
+import useAxios from "../utils/useAxios";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -28,7 +28,7 @@ const ChangePassword = () => {
     // TODO: Add logic to send a request to change the password
 
     api
-      .put(`${baseURL}accounts/change-password/${user_id}/`, {
+      .put(`${baseURL}/accounts/change-password/${user_id}/`, {
         old_password: oldPassword,
         password1: newPassword,
         password2: confirmPassword,
