@@ -11,7 +11,7 @@ const NotFound = () => {
         }}
       >
         <div className="text-center">
-          <h1 className="text-6xl text-gray-800">404</h1>
+          <h1 className="font-serif text-6xl text-gray-800">404</h1>
           <div className="pt-60">
             <h3 className="text-4xl text-gray-800">Looks like you're lost</h3>
             <p className="text-2xl text-gray-600 mt-4">
