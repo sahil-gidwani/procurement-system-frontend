@@ -23,13 +23,13 @@ const fields = [
     label: "New Password",
     id: "password1",
     type: "password",
-    gridCols: 1,
+    gridCols: 2,
   },
   {
     label: "Confirm Password",
     id: "password2",
     type: "password",
-    gridCols: 1,
+    gridCols: 2,
   },
 ];
 

@@ -9,6 +9,7 @@ import Login from "./pages/accounts/Login";
 import PasswordReset from "./pages/accounts/PasswordReset";
 import PasswordResetConfirm from "./pages/accounts/PasswordResetConfirm";
 import ChangePassword from "./pages/accounts/ChangePassword";
+import ProfileView from "./pages/accounts/ProfileView";
 import ProfileUpdate from "./pages/accounts/ProfileUpdate";
 import Loading from "./pages/Loading";
 
@@ -28,8 +29,8 @@ function App() {
               <Route path="password-reset-confirm/:id/:token" element={<PasswordResetConfirm />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="change-password" element={<ChangePassword />} />
-                {/* <Route path="profile" element={<Profile />} /> */}
-                <Route path="profile-update" element={<ProfileUpdate />} />
+                <Route path="profile" element={<ProfileView />} />
+                <Route path="profile/update" element={<ProfileUpdate />} />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
