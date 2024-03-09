@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LoadingSpinner from '../component/LoadingSpinner';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 function Loading() {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../redux/auth/authSlice";
+import { logout } from "../../redux/auth/authSlice";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
@@ -199,7 +199,7 @@ export default function NavBar() {
             <>
               <a
                 href="/login"
-                className="px-4 py-2 text-gray-800 bg-custom4 rounded-md shadow hover:bg-gray-100"
+                className="px-4 py-2 text-gray-800 bg-custom3 rounded-md shadow hover:bg-gray-100"
               >
                 Login
               </a>
