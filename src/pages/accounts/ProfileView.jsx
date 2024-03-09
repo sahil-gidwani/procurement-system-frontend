@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import useAxios from "../../utils/useAxios";
 import Toast from "../../components/common/Toast";
 import ProfileCard from "../../components/cards/ProfileCard";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 const ProfileView = () => {
   const baseURL = process.env.REACT_APP_API_URL;
@@ -27,7 +28,7 @@ const ProfileView = () => {
 
   return (
     <>
-      {user && (
+      {user ? (
         <ProfileCard
           firstName={user.first_name}
           lastName={user.last_name}
@@ -36,6 +37,8 @@ const ProfileView = () => {
           phoneNumber={user.phone_number}
           gstin={user.gstin}
         />
+      ) : (
+        <LoadingSpinner />
       )}
     </>
   );
