@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import NavBar from "./component/NavBar";
-import NotFound from "./container/NotFound";
-import Footer from "./component/Footer";
-import Login from "./container/Login";
-import Profile from "./container/Profile";
-import ChangePassword from "./container/ChangePassword";
-import Loading from "./container/Loading";
+import NavBar from "./components/common/NavBar";
+import NotFound from "./pages/NotFound";
+import Footer from "./components/common/Footer";
+import Register from "./pages/accounts/Register";
+import Login from "./pages/accounts/Login";
+import ChangePassword from "./pages/accounts/ChangePassword";
+import Loading from "./pages/Loading";
 
 function App() {
   return (
@@ -16,13 +16,15 @@ function App() {
         <NavBar />
         <div className="flex-grow min-h-screen">
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Loading />} />
             <Route path="/loading" element={<Loading />} />
-            {/* <Route path="/signup" element={<SignUp />} /> */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="accounts">
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route element={<ProtectedRoute />}>
+                {/* <Route path="profile" element={<Profile />} /> */}
+                <Route path="change-password" element={<ChangePassword />} />
+              </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
