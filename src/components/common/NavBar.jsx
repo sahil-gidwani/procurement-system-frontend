@@ -15,9 +15,9 @@ export default function NavBar() {
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <a href="/">
+            <span onClick={() => navigate("/")}>
               <h2 className="text-xl font-bold text-white">LOGO</h2>
-            </a>
+            </span>
             <div className="md:hidden">
               <button
                 className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
@@ -64,84 +64,84 @@ export default function NavBar() {
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="text-white hover:text-custom4">
-                <a href="javascript:void(0)">Home</a>
+                <span onClick={() => navigate("/")}>Home</span>
               </li>
               <li className="text-white hover:text-custom4">
-                <a href="javascript:void(0)">Blog</a>
+                <span onClick={() => navigate("/")}>Blog</span>
               </li>
               <li className="text-white hover:text-custom4">
-                <a href="javascript:void(0)">About US</a>
+                <span onClick={() => navigate("/")}>About US</span>
               </li>
               <li className="text-white hover:text-custom4">
-                <a href="javascript:void(0)">Contact US</a>
+                <span onClick={() => navigate("/")}>Contact US</span>
               </li>
             </ul>
             <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-            {user ? (
-            <div className="relative">
-              <button
-                className="inline-block w-full text-gray-800 bg-custom4 hover:bg-gray-100 rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
-                onClick={() => setShowDropdown(!showDropdown)}
-              >
-                {user.username}
-                <svg
-                  className="w-4 h-4 ml-2"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
-                  ></path>
-                </svg>
-              </button>
-              {showDropdown && (
-                <div
-                  id="dropdownList"
-                  className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-full top-12 left-0"
-                >
-                  <ul className="py-2 text-sm text-gray-800">
-                    <li>
-                      <button
-                        onClick={() => navigate("/profile")}
-                        className="block px-4 py-2 hover:bg-gray-100 w-full"
-                      >
-                        Profile
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        onClick={() => dispatch(logout())}
-                        className="block px-4 py-2 hover:bg-gray-100 w-full"
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
+              {user ? (
+                <div className="relative">
+                  <button
+                    className="inline-block w-full text-gray-800 bg-custom4 hover:bg-gray-100 rounded-lg text-sm px-4 py-2.5 text-center items-center"
+                    onClick={() => setShowDropdown(!showDropdown)}
+                  >
+                    {user.username}
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      ></path>
+                    </svg>
+                  </button>
+                  {showDropdown && (
+                    <div
+                      id="dropdownList"
+                      className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-full top-12 left-0"
+                    >
+                      <ul className="py-2 text-sm text-gray-800">
+                        <li>
+                          <button
+                            onClick={() => navigate("/accounts/profile/")}
+                            className="block px-4 py-2 hover:bg-gray-100 w-full"
+                          >
+                            Profile
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            onClick={() => dispatch(logout())}
+                            className="block px-4 py-2 hover:bg-gray-100 w-full"
+                          >
+                            Logout
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
+              ) : (
+                <>
+                  <span
+                    onClick={() => navigate("/accounts/login/")}
+                    className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-custom4 rounded-md shadow hover:bg-gray-100"
+                  >
+                    Login
+                  </span>
+                  <span
+                    onClick={() => navigate("/accounts/register/")}
+                    className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                  >
+                    Register
+                  </span>
+                </>
               )}
-            </div>
-          ) : (
-            <>
-              <a
-                href="/login"
-                className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-custom4 rounded-md shadow hover:bg-gray-100"
-              >
-                Login
-              </a>
-              <a
-                href="/register"
-                className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
-              >
-                Sign Up
-              </a>
-              </>
-          )}
             </div>
           </div>
         </div>
@@ -177,7 +177,7 @@ export default function NavBar() {
                   <ul className="py-2 text-sm text-gray-800">
                     <li>
                       <button
-                        onClick={() => navigate("/profile")}
+                        onClick={() => navigate("/accounts/profile/")}
                         className="block px-4 py-2 hover:bg-gray-100 w-full"
                       >
                         Profile
@@ -197,18 +197,18 @@ export default function NavBar() {
             </div>
           ) : (
             <>
-              <a
-                href="/login"
+              <span
+                onClick={() => navigate("/login")}
                 className="px-4 py-2 text-gray-800 bg-custom3 rounded-md shadow hover:bg-gray-100"
               >
                 Login
-              </a>
-              <a
-                href="/register"
+              </span>
+              <span
+                onClick={() => navigate("/register")}
                 className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
               >
-                Sign Up
-              </a>
+                Register
+              </span>
             </>
           )}
         </div>
