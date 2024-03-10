@@ -36,6 +36,9 @@ const ProfileView = () => {
           emailAddress={user.email}
           phoneNumber={user.phone_number}
           gstin={user.gstin}
+          companyName={user.company_name}
+          address={user.address}
+          vendorInfo={user?.vendor}
         />
       ) : (
         <LoadingSpinner />

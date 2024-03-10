@@ -11,7 +11,6 @@ import PasswordResetConfirm from "./pages/accounts/PasswordResetConfirm";
 import ChangePassword from "./pages/accounts/ChangePassword";
 import ProfileView from "./pages/accounts/ProfileView";
 import ProfileUpdate from "./pages/accounts/ProfileUpdate";
-import Loading from "./pages/Loading";
 
 function App() {
   return (
@@ -20,8 +19,7 @@ function App() {
         <NavBar />
         <div className="flex-grow min-h-screen">
           <Routes>
-            <Route path="/" element={<Loading />} />
-            <Route path="/loading" element={<Loading />} />
+            <Route path="/" element={<NotFound />} />
             <Route path="accounts">
               <Route path="register" element={<Register />} />
               <Route path="login" element={<Login />} />

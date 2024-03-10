@@ -48,6 +48,18 @@ const fields = [
     gridCols: 1,
   },
   {
+    label: "Company Name",
+    id: "company_name",
+    type: "text",
+    gridCols: 2,
+  },
+  {
+    label: "Address",
+    id: "address",
+    type: "textarea",
+    gridCols: 2,
+  },
+  {
     label: "Password",
     id: "password1",
     type: "password",
@@ -73,6 +85,8 @@ const schema = z
     gstin: z.string().regex(/^\d{2}[A-Z]{5}\d{4}[A-Z]{1}\d[Z]{1}[A-Z\d]{1}$/, {
       message: "Invalid GSTIN format",
     }),
+    company_name: z.string().min(1, { message: "Company name is required" }),
+    address: z.string().min(1, { message: "Address is required" }),
     password1: z
       .string()
       .min(8, { message: "Password must be at least 8 characters long" }),
@@ -83,7 +97,7 @@ const schema = z
     path: ["password2"],
   });
 
-export default function ProcurementOfficerRegisterForm() {
+export default function RegisterFormProcurementOfficer() {
   const baseURL = process.env.REACT_APP_API_URL;
 
   const form = useForm({
@@ -96,6 +110,8 @@ export default function ProcurementOfficerRegisterForm() {
       email: "",
       phone_number: "",
       gstin: "",
+      company_name: "",
+      address: "",
       password1: "",
       password2: "",
     },
@@ -134,6 +150,25 @@ export default function ProcurementOfficerRegisterForm() {
       });
   };
 
+  const renderErrors = (id) => {
+    const keys = id.split('.');
+    let currentError = errors;
+    for (const key of keys) {
+      if (currentError[key] === undefined) {
+        return null;
+      }
+      currentError = currentError[key];
+    }
+    if (currentError) {
+      return (
+        <span className="text-sm text-red-500 italic">
+          {currentError.message}
+        </span>
+      );
+    }
+    return null;
+  };
+
   return (
     <>
       <div className="container mx-auto">
@@ -157,23 +192,59 @@ export default function ProcurementOfficerRegisterForm() {
                     field.gridCols === 2 ? "md:col-span-2" : ""
                   }`}
                 >
-                  <label className="font-semibold">{field.label}</label>
-                  <input
-                    {...register(field.id)}
-                    className={`border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 ${
-                      field.gridCols === 2 ? "md:w-full" : ""
-                    }`}
-                    id={field.id}
-                    type={field.type}
-                    placeholder={field?.placeholder || ""}
-                    autoComplete={field.type === "password" ? "off" : "on"}
-                    disabled={isSubmitting}
-                  />
-                  {errors[field.id] && (
-                    <span className="text-sm text-red-500 italic">
-                      {errors[field.id]?.message}
-                    </span>
+                  {field.type !== "checkbox" && (
+                    <label className="font-semibold">{field.label}</label>
                   )}
+                  {field.type === "checkbox" ? (
+                    <div className="flex items-center">
+                      <input
+                        {...register(field.id)}
+                        type="checkbox"
+                        className="mr-2"
+                        disabled={isSubmitting}
+                      />
+                      <label className="font-semibold">{field.label}</label>
+                    </div>
+                  ) : field.type === "textarea" ? (
+                    <textarea
+                      {...register(field.id)}
+                      className={`border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 ${
+                        field.gridCols === 2 ? "md:w-full" : ""
+                      }`}
+                      id={field.id}
+                      placeholder={field?.placeholder || ""}
+                      autoComplete={field.type === "password" ? "off" : "on"}
+                      disabled={isSubmitting}
+                    />
+                  ) : field.type === "select" ? (
+                    <select
+                      {...register(field.id)}
+                      className={`border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 ${
+                        field.gridCols === 2 ? "md:w-full" : ""
+                      }`}
+                      id={field.id}
+                      disabled={isSubmitting}
+                    >
+                      {field.options.map((option, index) => (
+                        <option key={index} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      {...register(field.id)}
+                      className={`border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 ${
+                        field.gridCols === 2 ? "md:w-full" : ""
+                      }`}
+                      id={field.id}
+                      type={field.type}
+                      placeholder={field?.placeholder || ""}
+                      autoComplete={field.type === "password" ? "off" : "on"}
+                      disabled={isSubmitting}
+                    />
+                  )}
+                  {renderErrors(field.id)}
                 </div>
               ))}
             </div>

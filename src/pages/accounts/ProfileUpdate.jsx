@@ -1,8 +1,15 @@
 import React from "react";
-import ProfileUpdateForm from "../../components/forms/ProfileUpdateForm";
+import { useSelector } from "react-redux";
+import ProfileUpdateFormProcurementOfficer from "../../components/forms/ProfileUpdateFormProcurementOfficer";
+import ProfileUpdateFormVendor from "../../components/forms/ProfileUpdateFormVendor";
 
 const ProfileUpdate = () => {
-  return <ProfileUpdateForm />;
+  const user = useSelector((state) => state.auth.user);
+  if (user.user_role === "vendor") {
+    return <ProfileUpdateFormVendor />;
+  } else {
+    return <ProfileUpdateFormProcurementOfficer />;
+  }
 };
 
 export default ProfileUpdate;

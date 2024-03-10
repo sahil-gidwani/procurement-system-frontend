@@ -1,11 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { HiOutlineArrowCircleRight } from "react-icons/hi";
-import { IoIosLogIn } from "react-icons/io";
-import axios from "axios";
+import { PiUserCircleLight } from "react-icons/pi";
+import useAxios from "../../utils/useAxios";
 import Toast from "../common/Toast";
 import FormHeader from "../common/FormHeader";
 
@@ -48,44 +49,15 @@ const fields = [
     gridCols: 1,
   },
   {
-    label: "Password",
-    id: "password1",
-    type: "password",
-    gridCols: 1,
-  },
-  {
-    label: "Confirm Password",
-    id: "password2",
-    type: "password",
-    gridCols: 1,
-  },
-  {
-    label: "Name of Organization",
-    id: "vendor_info.vendor_name",
+    label: "Company Name",
+    id: "company_name",
     type: "text",
-    gridCols: 1,
-  },
-  {
-    label: "Type of Vendor",
-    id: "vendor_info.vendor_type",
-    type: "select",
-    gridCols: 1,
-    options: [
-      { value: "supplier", label: "Supplier" },
-      { value: "manufacturer", label: "Manufacturer" },
-      { value: "service_provider", label: "Service Provider" },
-    ],
-  },
-  {
-    label: "Address",
-    id: "vendor_info.address",
-    type: "textarea",
     gridCols: 2,
   },
   {
-    label: "Are you a certified vendor?",
-    id: "vendor_info.vendor_certified",
-    type: "checkbox",
+    label: "Address",
+    id: "address",
+    type: "textarea",
     gridCols: 2,
   },
 ];
@@ -102,71 +74,47 @@ const schema = z
     gstin: z.string().regex(/^\d{2}[A-Z]{5}\d{4}[A-Z]{1}\d[Z]{1}[A-Z\d]{1}$/, {
       message: "Invalid GSTIN format",
     }),
-    password1: z
-      .string()
-      .min(8, { message: "Password must be at least 8 characters long" }),
-    password2: z.string(),
-    vendor_info: z.object({
-      vendor_name: z
-        .string()
-        .min(1, { message: "Name of Organization is required" }),
-      vendor_type: z.string().min(1, { message: "Type of Vendor is required" }),
-      address: z.string().min(1, { message: "Address is required" }),
-      vendor_certified: z.boolean(),
-    }),
-  })
-  .refine((data) => data.password1 === data.password2, {
-    message: "Passwords do not match",
-    path: ["password2"],
+    company_name: z.string().min(1, { message: "Company name is required" }),
+    address: z.string().min(1, { message: "Address is required" }),
   });
 
-export default function VendorRegisterForm() {
+export default function ProfileUpdateFormProcurementOfficer() {
   const baseURL = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
+  const api = useAxios();
 
   const form = useForm({
     resolver: zodResolver(schema),
     mode: "onTouched",
-    defaultValues: {
-      first_name: "",
-      last_name: "",
-      username: "",
-      email: "",
-      phone_number: "",
-      gstin: "",
-      password1: "",
-      password2: "",
-      vendor_info: {
-        vendor_name: "",
-        vendor_type: "",
-        address: "",
-        vendor_certified: false,
-      },
+    defaultValues: async () => {
+      const response = await api.get(`${baseURL}/accounts/profile/`);
+      return response.data;
     },
   });
 
-  const { register, handleSubmit, formState, control, reset, setError } = form;
+  const { register, handleSubmit, formState, control, setError } = form;
 
   const { errors, isSubmitting, isValid } = formState;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
 
-    axios
-      .post(`${baseURL}/accounts/register/vendor/`, data)
+    api
+      .put(`${baseURL}/accounts/profile/update/`, data)
       .then((response) => {
         console.log(response);
         Toast.fire({
           icon: "success",
-          title: "Registered successfully!",
+          title: "Profile updated successfully!",
         });
-        reset();
+        navigate("/accounts/profile/");
       })
       .catch((error) => {
         const errors = error.response.data;
-        console.error("Error fetching data: ", errors);
+        console.error("Error updating data: ", errors);
         Toast.fire({
           icon: "error",
-          title: "Registration failed!",
+          title: "Profile update failed!",
         });
         Object.keys(errors).forEach((key) => {
           setError(key, {
@@ -201,11 +149,8 @@ export default function VendorRegisterForm() {
       <div className="container mx-auto">
         <div className="lg:w-7/12 pb-10 pt-5 w-full p-6 flex flex-wrap justify-center shadow-2xl my-12 rounded-lg mx-auto">
           <FormHeader
-            icon={IoIosLogIn}
-            title="Vendor Registration"
-            subTitle="Already have an account?"
-            linkText="Login"
-            navigateTo="/accounts/login/"
+            icon={PiUserCircleLight}
+            title="Update Profile"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -285,7 +230,7 @@ export default function VendorRegisterForm() {
                 }`}
                 disabled={!isValid || isSubmitting}
               >
-                <span>Register</span>
+                <span>Submit</span>
                 <HiOutlineArrowCircleRight size={20} />
               </button>
             </div>

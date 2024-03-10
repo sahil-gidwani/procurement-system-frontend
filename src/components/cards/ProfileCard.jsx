@@ -11,11 +11,20 @@ const ProfileCard = ({
   emailAddress,
   phoneNumber,
   gstin,
+  companyName,
+  address,
+  vendorInfo,
 }) => {
   const fullName = `${firstName} ${lastName}`;
   const baseURL = process.env.REACT_APP_API_URL;
   const api = useAxios();
   const navigate = useNavigate();
+
+  const vendorTypeMap = {
+    supplier: "Supplier",
+    manufacturer: "Manufacturer",
+    service_provider: "Service Provider",
+  };
 
   const profileFields = [
     { label: "Full name", value: fullName },
@@ -23,6 +32,34 @@ const ProfileCard = ({
     { label: "Email address", value: emailAddress },
     { label: "Phone number", value: phoneNumber },
     { label: "GSTIN", value: gstin },
+    { label: "Company name", value: companyName },
+    { label: "Address", value: address },
+    // Conditionally rendered fields
+    ...(vendorInfo
+      ? [
+          {
+            label: "Certified vendor",
+            value: vendorInfo.vendor_certified ? "Yes" : "No",
+          },
+          {
+            label: "Type of vendor",
+            value: vendorInfo?.vendor_type
+              ? vendorTypeMap[vendorInfo.vendor_type]
+              : "N/A",
+          },
+          {
+            label: "Vendor Rating",
+            value:
+              vendorInfo?.vendor_rating !== undefined
+                ? `${vendorInfo.vendor_rating}/5`
+                : "N/A",
+          },
+          {
+            label: "Contract Expiry Date",
+            value: vendorInfo?.contract_expiry_date || "N/A",
+          },
+        ]
+      : []),
   ];
 
   const handleUpdate = () => {

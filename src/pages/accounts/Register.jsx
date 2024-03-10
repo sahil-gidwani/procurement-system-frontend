@@ -1,13 +1,13 @@
 import React from "react";
-import ProcurementOfficerRegisterForm from "../../components/forms/ProcurementOfficerRegisterForm";
-import VendorRegisterForm from "../../components/forms/VendorRegisterForm";
+import RegisterFormProcurementOfficer from "../../components/forms/RegisterFormProcurementOfficer";
+import RegisterFormVendor from "../../components/forms/RegisterFormVendor";
 import Tabs from "../../components/common/Tabs";
 
 const Register = () => {
   return (
       <Tabs>
-        <ProcurementOfficerRegisterForm tabTitle="Procurement Officer" />
-        <VendorRegisterForm tabTitle="Vendor" />
+        <RegisterFormProcurementOfficer tabTitle="Procurement Officer" />
+        <RegisterFormVendor tabTitle="Vendor" />
       </Tabs>
   );
 };
