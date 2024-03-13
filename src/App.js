@@ -12,6 +12,7 @@ import PasswordResetConfirm from "./pages/accounts/PasswordResetConfirm";
 import ChangePassword from "./pages/accounts/ChangePassword";
 import ProfileView from "./pages/accounts/ProfileView";
 import ProfileUpdate from "./pages/accounts/ProfileUpdate";
+import InventoryList from "./pages/inventory/InventoryList";
 import DemoTable from "./pages/DemoTable";
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
                 <Route path="profile" element={<ProfileView />} />
                 <Route path="profile/update" element={<ProfileUpdate />} />
               </Route>
+            </Route>
+            <Route path="inventory">
+              <Route path="list" element={<InventoryList />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

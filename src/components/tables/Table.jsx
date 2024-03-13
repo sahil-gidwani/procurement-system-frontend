@@ -8,12 +8,13 @@ import {
 } from "react-table";
 import { CSVLink } from "react-csv";
 import { MdOutlineFileDownload } from "react-icons/md";
+import { FiPlusCircle } from "react-icons/fi";
 import { SortIcon, SortUpIcon, SortDownIcon } from "./shared/Icons";
 import GlobalFilter from "./GlobalFilter";
 import ColumnSelector from "./ColumnSelector";
 import Pagination from "./Pagination";
 
-function Table({ columns, data }) {
+function Table({ columns, data, title, createButton }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -65,14 +66,28 @@ function Table({ columns, data }) {
 
   return (
     <div className="container mx-auto my-12">
-      {/* Global Filter, Column Filters and Column Selector */}
-      <div className="mx-4 mt-4 flex flex-col items-center gap-4 sm:mx-6 sm:px-6 lg:mx-8 lg:flex-row lg:justify-between lg:px-8">
+      <div className="mx-4 mt-4 sm:mx-6 sm:px-6 lg:mx-8 lg:px-8">
+        <h1 className="text-3xl text-center font-bold text-gray-800">
+          {title}
+        </h1>
+      </div>
+      <div className="mx-4 mt-8 flex flex-col items-center gap-4 sm:mx-6 sm:px-6 lg:mx-8 lg:flex-row lg:justify-between lg:px-8">
+        {/* Create Button */}
+        {createButton && (
+          <button
+            className="flex max-w-max items-center space-x-1 rounded bg-green-500 px-4 py-2 font-semibold text-white hover:bg-green-700"
+            onClick={createButton.action}
+          >
+            <span>{createButton.label}</span> <FiPlusCircle />
+          </button>
+        )}
+        {/* Global Filter, Column Filters and Column Selector */}
         <GlobalFilter
           preGlobalFilteredRows={preGlobalFilteredRows}
           globalFilter={state.globalFilter}
           setGlobalFilter={setGlobalFilter}
         />
-        <div className="sm:flex sm:gap-x-2">
+        {/* <div className="sm:flex sm:gap-x-2">
           {headerGroups.map((headerGroup) =>
             headerGroup.headers.map((column) =>
               column.Filter ? (
@@ -82,7 +97,7 @@ function Table({ columns, data }) {
               ) : null,
             ),
           )}
-        </div>
+        </div> */}
         <ColumnSelector
           allColumns={allColumns}
           getToggleHideAllColumnsProps={getToggleHideAllColumnsProps}
@@ -100,7 +115,8 @@ function Table({ columns, data }) {
       <div className="mt-4 flex flex-col">
         <div className="-my-2 mx-4 overflow-x-auto sm:mx-6 lg:mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div className="overflow-hidden border-b border-gray-200 shadow-lg sm:rounded-lg">
+            {/* add "overflow-hidden" to the table in the parent div */}
+            <div className="border-b border-gray-200 shadow-lg sm:rounded-lg">
               <table
                 {...getTableProps()}
                 className="min-w-full divide-y divide-gray-200"
