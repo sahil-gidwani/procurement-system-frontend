@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
@@ -63,7 +63,7 @@ const schema = z.object({
   description: z.string().min(1, { message: "Description is required" }),
   unit_price: z
     .number()
-    .min(0.00, { message: "Unit price must be greater than or equal to 0" }),
+    .min(0.0, { message: "Unit price must be greater than or equal to 0" }),
   stock_quantity: z
     .number()
     .min(0, { message: "Stock quantity must be greater than or equal to 0" })
@@ -91,15 +91,35 @@ export default function InventoryUpdateForm() {
   const form = useForm({
     resolver: zodResolver(schema),
     mode: "onTouched",
-    defaultValues: async () => {
-        const response = await api.get(`${baseURL}/inventory/${id}/`);
-        return response.data;
-      },
+    defaultValues: {
+      image: null,
+    },
   });
 
-  const { register, handleSubmit, formState, control, setError } = form;
+  const { register, handleSubmit, formState, control, setError, setValue } =
+    form;
 
   const { errors, isSubmitting, isValid } = formState;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`${baseURL}/inventory/${id}/`);
+        const data = response.data;
+        // Set default values for all fields except the image
+        for (const field of fields) {
+          if (field.id !== "image") {
+            setValue(field.id, data[field.id]);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -109,7 +129,9 @@ export default function InventoryUpdateForm() {
     Object.entries(data).forEach(([key, value]) => {
       const field = fields.find((field) => field.id === key);
       if (field && field.type === "file") {
-        formData.append(key, value[0]);
+        if (value) {
+          formData.append(key, value[0]);
+        }
       } else {
         formData.append(key, value);
       }
@@ -168,7 +190,7 @@ export default function InventoryUpdateForm() {
     <>
       <div className="container mx-auto">
         <div className="mx-auto my-12 flex w-full flex-wrap justify-center rounded-lg p-6 pb-10 pt-5 shadow-2xl lg:w-7/12">
-        <FormHeader
+          <FormHeader
             icon={MdOutlineLocalGroceryStore}
             title="Update Item"
             subTitle="Return to the List of Inventory Items"

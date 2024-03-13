@@ -112,7 +112,9 @@ export default function InventoryCreateForm() {
     Object.entries(data).forEach(([key, value]) => {
       const field = fields.find((field) => field.id === key);
       if (field && field.type === "file") {
-        formData.append(key, value[0]);
+        if (value) {
+          formData.append(key, value[0]);
+        }
       } else {
         formData.append(key, value);
       }
