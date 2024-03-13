@@ -16,10 +16,10 @@ import InventoryList from "./pages/inventory/InventoryList";
 import InventoryCreate from "./pages/inventory/InventoryCreate";
 import InventoryView from "./pages/inventory/InventoryView";
 import InventoryUpdate from "./pages/inventory/InventoryUpdate";
+import ForecastInventory from "./pages/inventory/ForecastInventory";
 import OptimizeInventoryView from "./pages/inventory/OptimizeInventoryView";
 import OptimizeInventoryCreate from "./pages/inventory/OptimizeInventoryCreate";
 import OptimizeInventoryUpdate from "./pages/inventory/OptimizeInventoryUpdate";
-import DemoTable from "./pages/DemoTable";
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         <NavBar />
         <div className="min-h-screen flex-grow">
           <Routes>
-            <Route path="/" element={<DemoTable />} />
+            <Route path="/" element={<NotFound />} />
             <Route path="accounts">
               <Route path="register" element={<Register />} />
               <Route path="login" element={<Login />} />
@@ -50,7 +50,7 @@ function App() {
               <Route path="view/:id" element={<InventoryView />} />
               <Route path="update/:id" element={<InventoryUpdate />} />
               <Route path="historical/:id" element={<InventoryList />} />
-              <Route path="forecast/:id" element={<InventoryList />} />
+              <Route path="forecast/:id" element={<ForecastInventory />} />
               <Route path="optimize/:id" element={<OptimizeInventoryView />} />
               <Route path="optimize/:id/create" element={<OptimizeInventoryCreate />} />
               <Route path="optimize/:id/update" element={<OptimizeInventoryUpdate />} />
