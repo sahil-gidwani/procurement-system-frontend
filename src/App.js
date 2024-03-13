@@ -17,6 +17,8 @@ import InventoryCreate from "./pages/inventory/InventoryCreate";
 import InventoryView from "./pages/inventory/InventoryView";
 import InventoryUpdate from "./pages/inventory/InventoryUpdate";
 import OptimizeInventoryView from "./pages/inventory/OptimizeInventoryView";
+import OptimizeInventoryCreate from "./pages/inventory/OptimizeInventoryCreate";
+import OptimizeInventoryUpdate from "./pages/inventory/OptimizeInventoryUpdate";
 import DemoTable from "./pages/DemoTable";
 
 function App() {
@@ -50,8 +52,8 @@ function App() {
               <Route path="historical/:id" element={<InventoryList />} />
               <Route path="forecast/:id" element={<InventoryList />} />
               <Route path="optimize/:id" element={<OptimizeInventoryView />} />
-              <Route path="optimize/:id/create" element={<InventoryList />} />
-              <Route path="optimize/:id/update" element={<InventoryList />} />
+              <Route path="optimize/:id/create" element={<OptimizeInventoryCreate />} />
+              <Route path="optimize/:id/update" element={<OptimizeInventoryUpdate />} />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
