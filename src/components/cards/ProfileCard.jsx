@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import useAxios from "../../utils/useAxios";
 import Toast from "../../components/common/Toast";
 import { PiUserCircleLight } from "react-icons/pi";
@@ -67,36 +67,36 @@ const ProfileCard = ({
     navigate("/accounts/profile/update/");
   };
 
-const handleDelete = async () => {
-  const result = await Swal.fire({
-    title: 'Are you sure?',
-    text: 'You are about to delete your account permanently. This action cannot be undone!',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, delete it!',
-    cancelButtonText: 'No, cancel',
-    reverseButtons: true,
-    focusCancel: true
-  });
+  const handleDelete = async () => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to delete your account permanently. This action cannot be undone!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true,
+      focusCancel: true,
+    });
 
-  if (result.isConfirmed) {
-    try {
-      await api.delete(`${baseURL}/accounts/profile/delete/`);
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'User profile deleted successfully!'
-      });
-    } catch (error) {
-      console.error('Error deleting user profile:', error);
-      
-      Toast.fire({
-        icon: 'error',
-        title: 'Error deleting user profile!'
-      });
+    if (result.isConfirmed) {
+      try {
+        await api.delete(`${baseURL}/accounts/profile/delete/`);
+
+        Toast.fire({
+          icon: "success",
+          title: "User profile deleted successfully!",
+        });
+      } catch (error) {
+        console.error("Error deleting user profile:", error);
+
+        Toast.fire({
+          icon: "error",
+          title: "Error deleting user profile!",
+        });
+      }
     }
-  } 
-};
+  };
 
   return (
     <div className="mx-auto my-12 w-full overflow-hidden rounded-lg border p-3 shadow lg:w-1/3">

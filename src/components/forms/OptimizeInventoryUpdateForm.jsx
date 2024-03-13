@@ -98,9 +98,9 @@ export default function OptimizeInventoryUpdateForm() {
     resolver: zodResolver(schema),
     mode: "onTouched",
     defaultValues: async () => {
-        const response = await api.get(`${baseURL}/inventory/optimize/${id}/`);
-        return response.data;
-      },
+      const response = await api.get(`${baseURL}/inventory/optimize/${id}/`);
+      return response.data;
+    },
   });
 
   const { register, handleSubmit, formState, control, setError } = form;

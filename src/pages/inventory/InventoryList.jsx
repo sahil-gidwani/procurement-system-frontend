@@ -137,13 +137,21 @@ const InventoryList = () => {
       {
         Header: "Date Added",
         accessor: "date_added",
-        Cell: ({ value }) => <span className="text-sm text-gray-500">{new Date(value).toLocaleDateString()}</span>,
+        Cell: ({ value }) => (
+          <span className="text-sm text-gray-500">
+            {new Date(value).toLocaleDateString()}
+          </span>
+        ),
         show: false,
       },
       {
         Header: "Last Updated",
         accessor: "last_updated",
-        Cell: ({ value }) => <span className="text-sm text-gray-500">{new Date(value).toLocaleDateString()}</span>,
+        Cell: ({ value }) => (
+          <span className="text-sm text-gray-500">
+            {new Date(value).toLocaleDateString()}
+          </span>
+        ),
         show: false,
       },
       {

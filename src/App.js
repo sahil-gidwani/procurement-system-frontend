@@ -46,15 +46,27 @@ function App() {
             </Route>
             <Route path="inventory">
               <Route element={<ProtectedRoute role="procurement_officer" />}>
-              <Route path="list" element={<InventoryList />} />
-              <Route path="create" element={<InventoryCreate />}/>
-              <Route path="view/:id" element={<InventoryView />} />
-              <Route path="update/:id" element={<InventoryUpdate />} />
-              <Route path="historical/:id" element={<HistoricalInventory />} />
-              <Route path="forecast/:id" element={<ForecastInventory />} />
-              <Route path="optimize/:id" element={<OptimizeInventoryView />} />
-              <Route path="optimize/:id/create" element={<OptimizeInventoryCreate />} />
-              <Route path="optimize/:id/update" element={<OptimizeInventoryUpdate />} />
+                <Route path="list" element={<InventoryList />} />
+                <Route path="create" element={<InventoryCreate />} />
+                <Route path="view/:id" element={<InventoryView />} />
+                <Route path="update/:id" element={<InventoryUpdate />} />
+                <Route
+                  path="historical/:id"
+                  element={<HistoricalInventory />}
+                />
+                <Route path="forecast/:id" element={<ForecastInventory />} />
+                <Route
+                  path="optimize/:id"
+                  element={<OptimizeInventoryView />}
+                />
+                <Route
+                  path="optimize/:id/create"
+                  element={<OptimizeInventoryCreate />}
+                />
+                <Route
+                  path="optimize/:id/update"
+                  element={<OptimizeInventoryUpdate />}
+                />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />

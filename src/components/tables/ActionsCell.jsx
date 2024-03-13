@@ -14,7 +14,7 @@ const ActionsCell = ({ value, actions }) => {
         <PiDotsThreeBold size={20} />
       </button>
       {showDropdown && (
-        <div className="absolute top-8 right-0 z-10 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
+        <div className="absolute right-0 top-8 z-10 w-48 divide-y divide-gray-100 rounded-md border border-gray-200 bg-white shadow-lg">
           {actions.map((action, index) => (
             <button
               key={index}

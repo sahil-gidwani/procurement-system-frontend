@@ -67,7 +67,7 @@ function Table({ columns, data, title, createButton }) {
   return (
     <div className="container mx-auto my-12">
       <div className="mx-4 mt-4 sm:mx-6 sm:px-6 lg:mx-8 lg:px-8">
-        <h1 className="text-3xl text-center font-bold text-gray-800">
+        <h1 className="text-center text-3xl font-bold text-gray-800">
           {title}
         </h1>
       </div>

@@ -57,9 +57,7 @@ const schema = z.object({
   holding_cost: z
     .number()
     .min(0.01, { message: "Holding cost must be greater than 0" }),
-  lead_time: z
-    .number()
-    .min(1, { message: "Lead time must be greater than 0" }),
+  lead_time: z.number().min(1, { message: "Lead time must be greater than 0" }),
   service_level: z
     .number()
     .min(0.01, { message: "Service level must be greater than 0" })

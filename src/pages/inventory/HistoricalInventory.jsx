@@ -18,7 +18,11 @@ const HistoricalInventory = () => {
       {
         Header: "Date",
         accessor: "datetime",
-        Cell: ({ value }) => <span className="text-sm text-gray-500">{new Date(value).toLocaleDateString()}</span>,
+        Cell: ({ value }) => (
+          <span className="text-sm text-gray-500">
+            {new Date(value).toLocaleDateString()}
+          </span>
+        ),
       },
       {
         Header: "Stock Quantity",
@@ -37,7 +41,9 @@ const HistoricalInventory = () => {
     const fetchHistoricalInventory = async () => {
       setIsLoading(true);
       try {
-        const response = await api.get(`${baseURL}/inventory/historical/${id}/list/`);
+        const response = await api.get(
+          `${baseURL}/inventory/historical/${id}/list/`,
+        );
         setHistoricalInventory(response.data);
       } catch (error) {
         console.error("Error fetching historical inventory:", error);
