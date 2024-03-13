@@ -13,6 +13,10 @@ import ChangePassword from "./pages/accounts/ChangePassword";
 import ProfileView from "./pages/accounts/ProfileView";
 import ProfileUpdate from "./pages/accounts/ProfileUpdate";
 import InventoryList from "./pages/inventory/InventoryList";
+import InventoryCreate from "./pages/inventory/InventoryCreate";
+import InventoryView from "./pages/inventory/InventoryView";
+import InventoryUpdate from "./pages/inventory/InventoryUpdate";
+import OptimizeInventoryView from "./pages/inventory/OptimizeInventoryView";
 import DemoTable from "./pages/DemoTable";
 
 function App() {
@@ -40,12 +44,12 @@ function App() {
             <Route path="inventory">
               <Route element={<ProtectedRoute role="procurement_officer" />}>
               <Route path="list" element={<InventoryList />} />
-              <Route path="create" element={<InventoryList />}/>
-              <Route path="view/:id" element={<InventoryList />} />
-              <Route path="update/:id" element={<InventoryList />} />
+              <Route path="create" element={<InventoryCreate />}/>
+              <Route path="view/:id" element={<InventoryView />} />
+              <Route path="update/:id" element={<InventoryUpdate />} />
               <Route path="historical/:id" element={<InventoryList />} />
               <Route path="forecast/:id" element={<InventoryList />} />
-              <Route path="optimize/:id" element={<InventoryList />} />
+              <Route path="optimize/:id" element={<OptimizeInventoryView />} />
               <Route path="optimize/:id/create" element={<InventoryList />} />
               <Route path="optimize/:id/update" element={<InventoryList />} />
               </Route>
