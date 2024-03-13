@@ -112,7 +112,14 @@ function DemoTable() {
 
   const data = React.useMemo(() => getData(), []);
 
-  return <Table columns={columns} data={data} />;
+  const createButton = {
+    label: "Add Item",
+    action: () => {
+      console.log("Create button clicked");
+    },
+  };
+
+  return <Table columns={columns} data={data} title="Demo Table" createButton={createButton} />;
 }
 
 export default DemoTable;

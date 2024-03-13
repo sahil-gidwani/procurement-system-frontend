@@ -39,6 +39,14 @@ function App() {
             </Route>
             <Route path="inventory">
               <Route path="list" element={<InventoryList />} />
+              <Route path="create" element={<InventoryList />}/>
+              <Route path="view/:id" element={<InventoryList />} />
+              <Route path="update/:id" element={<InventoryList />} />
+              <Route path="historical/:id" element={<InventoryList />} />
+              <Route path="forecast/:id" element={<InventoryList />} />
+              <Route path="optimize/:id" element={<InventoryList />} />
+              <Route path="optimize/:id/create" element={<InventoryList />} />
+              <Route path="optimize/:id/update" element={<InventoryList />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
