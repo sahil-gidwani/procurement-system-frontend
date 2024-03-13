@@ -38,6 +38,7 @@ function App() {
               </Route>
             </Route>
             <Route path="inventory">
+              <Route element={<ProtectedRoute role="procurement_officer" />}>
               <Route path="list" element={<InventoryList />} />
               <Route path="create" element={<InventoryList />}/>
               <Route path="view/:id" element={<InventoryList />} />
@@ -47,6 +48,7 @@ function App() {
               <Route path="optimize/:id" element={<InventoryList />} />
               <Route path="optimize/:id/create" element={<InventoryList />} />
               <Route path="optimize/:id/update" element={<InventoryList />} />
+              </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
