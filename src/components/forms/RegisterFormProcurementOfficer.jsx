@@ -151,7 +151,7 @@ export default function RegisterFormProcurementOfficer() {
   };
 
   const renderErrors = (id) => {
-    const keys = id.split('.');
+    const keys = id.split(".");
     let currentError = errors;
     for (const key of keys) {
       if (currentError[key] === undefined) {
@@ -161,7 +161,7 @@ export default function RegisterFormProcurementOfficer() {
     }
     if (currentError) {
       return (
-        <span className="text-sm text-red-500 italic">
+        <span className="text-sm italic text-red-500">
           {currentError.message}
         </span>
       );
@@ -172,7 +172,7 @@ export default function RegisterFormProcurementOfficer() {
   return (
     <>
       <div className="container mx-auto">
-        <div className="lg:w-7/12 pb-10 pt-5 w-full p-6 flex flex-wrap justify-center shadow-2xl my-12 rounded-lg mx-auto">
+        <div className="mx-auto my-12 flex w-full flex-wrap justify-center rounded-lg p-6 pb-10 pt-5 shadow-2xl lg:w-7/12">
           <FormHeader
             icon={IoIosLogIn}
             title="Procurement Officer Registration"
@@ -182,13 +182,13 @@ export default function RegisterFormProcurementOfficer() {
           />
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col justify-start items-center w-full m-auto"
+            className="m-auto flex w-full flex-col items-center justify-start"
           >
-            <div className="grid grid-cols-1 mb-6 md:grid-cols-2 gap-3 w-full">
+            <div className="mb-6 grid w-full grid-cols-1 gap-3 md:grid-cols-2">
               {fields.map((field, index) => (
                 <div
                   key={index}
-                  className={`text-left flex flex-col gap-2 w-full ${
+                  className={`flex w-full flex-col gap-2 text-left ${
                     field.gridCols === 2 ? "md:col-span-2" : ""
                   }`}
                 >
@@ -208,7 +208,7 @@ export default function RegisterFormProcurementOfficer() {
                   ) : field.type === "textarea" ? (
                     <textarea
                       {...register(field.id)}
-                      className={`border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 ${
+                      className={`m-0 mb-1 w-full max-w-full rounded-md border border-gray-300 px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 md:mb-0 md:px-4 md:py-3 ${
                         field.gridCols === 2 ? "md:w-full" : ""
                       }`}
                       id={field.id}
@@ -219,7 +219,7 @@ export default function RegisterFormProcurementOfficer() {
                   ) : field.type === "select" ? (
                     <select
                       {...register(field.id)}
-                      className={`border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 ${
+                      className={`m-0 mb-1 w-full max-w-full rounded-md border border-gray-300 px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 md:mb-0 md:px-4 md:py-3 ${
                         field.gridCols === 2 ? "md:w-full" : ""
                       }`}
                       id={field.id}
@@ -234,7 +234,7 @@ export default function RegisterFormProcurementOfficer() {
                   ) : (
                     <input
                       {...register(field.id)}
-                      className={`border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 ${
+                      className={`m-0 mb-1 w-full max-w-full rounded-md border border-gray-300 px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 md:mb-0 md:px-4 md:py-3 ${
                         field.gridCols === 2 ? "md:w-full" : ""
                       }`}
                       id={field.id}
@@ -248,10 +248,10 @@ export default function RegisterFormProcurementOfficer() {
                 </div>
               ))}
             </div>
-            <div className="w-full text-left my-4">
+            <div className="my-4 w-full text-left">
               <button
                 type="submit"
-                className={`flex justify-center items-center gap-2 w-full py-3 px-4 bg-blue-500 text-white text-md font-bold border border-blue-500 rounded-md ease-in-out duration-150 shadow-slate-600 hover:bg-white hover:text-blue-500 lg:m-0 md:px-6 ${
+                className={`text-md flex w-full items-center justify-center gap-2 rounded-md border border-blue-500 bg-blue-500 px-4 py-3 font-bold text-white shadow-slate-600 duration-150 ease-in-out hover:bg-white hover:text-blue-500 md:px-6 lg:m-0 ${
                   !isValid || isSubmitting
                     ? "cursor-not-allowed"
                     : "cursor-pointer"

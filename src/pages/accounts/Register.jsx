@@ -5,10 +5,10 @@ import Tabs from "../../components/common/Tabs";
 
 const Register = () => {
   return (
-      <Tabs>
-        <RegisterFormProcurementOfficer tabTitle="Procurement Officer" />
-        <RegisterFormVendor tabTitle="Vendor" />
-      </Tabs>
+    <Tabs>
+      <RegisterFormProcurementOfficer tabTitle="Procurement Officer" />
+      <RegisterFormVendor tabTitle="Vendor" />
+    </Tabs>
   );
 };
 

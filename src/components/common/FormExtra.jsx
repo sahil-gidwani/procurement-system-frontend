@@ -6,7 +6,7 @@ const FormExtra = ({ label = "", linkText, navigateTo }) => {
 
   return (
     <div className="w-full text-right">
-      <p className="text-gray-500 font-semibold">
+      <p className="font-semibold text-gray-500">
         {label}{" "}
         <span
           className="text-custom2 hover:cursor-pointer"

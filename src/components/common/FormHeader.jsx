@@ -12,9 +12,9 @@ const FormHeader = ({
 
   return (
     <div className="pb-12 text-center">
-      <Icon size={60} className="text-custom2 mx-auto" />
-      <h1 className="text-3xl font-bold mt-2 mb-3">{title}</h1>
-      <p className="text-gray-500 font-semibold">
+      <Icon size={60} className="mx-auto text-custom2" />
+      <h1 className="mb-3 mt-2 text-3xl font-bold">{title}</h1>
+      <p className="font-semibold text-gray-500">
         {subTitle}{" "}
         <span
           className="text-custom2 hover:cursor-pointer"

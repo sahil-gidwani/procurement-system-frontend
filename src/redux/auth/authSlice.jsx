@@ -23,7 +23,7 @@ export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(
-      error.response ? error.response.data : "Something went wrong"
+      error.response ? error.response.data : "Something went wrong",
     );
   }
 });
@@ -36,7 +36,7 @@ const authSlice = createSlice({
       state.tokens = action.payload;
       localStorage.setItem(
         "procurement_tokens",
-        JSON.stringify(action.payload)
+        JSON.stringify(action.payload),
       );
     },
     setUser: (state, action) => {
@@ -59,7 +59,7 @@ const authSlice = createSlice({
       state.user = jwtDecode(action.payload.access);
       localStorage.setItem(
         "procurement_tokens",
-        JSON.stringify(action.payload)
+        JSON.stringify(action.payload),
       );
     });
     builder.addCase(login.rejected, (state, action) => {

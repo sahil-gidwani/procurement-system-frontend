@@ -5,23 +5,23 @@ const Tabs = ({ children }) => {
 
   return (
     <>
-      <div className="flex flex-wrap my-12 lg:mx-12 mx-3">
+      <div className="mx-3 my-12 flex flex-wrap lg:mx-12">
         <div className="w-full">
           <ul
-            className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+            className="mb-0 flex list-none flex-row flex-wrap pb-4 pt-3"
             role="tablist"
           >
             {React.Children.map(children, (child, index) => (
               <li
-                className="-mb-px mr-2 last:mr-0 flex-auto text-center"
+                className="-mb-px mr-2 flex-auto text-center last:mr-0"
                 key={index}
               >
                 <a
                   className={
-                    "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                    "block rounded px-5 py-3 text-xs font-bold uppercase leading-normal shadow-lg " +
                     (openTab === index + 1
-                      ? "text-white bg-custom2"
-                      : "text-custom2 bg-white")
+                      ? "bg-custom2 text-white"
+                      : "bg-white text-custom2")
                   }
                   onClick={(e) => {
                     e.preventDefault();
@@ -36,8 +36,8 @@ const Tabs = ({ children }) => {
               </li>
             ))}
           </ul>
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-            <div className="px-4 py-5 flex-auto">
+          <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-white shadow-lg">
+            <div className="flex-auto px-4 py-5">
               <div className="tab-content tab-space">
                 {React.Children.map(children, (child, index) => (
                   <div

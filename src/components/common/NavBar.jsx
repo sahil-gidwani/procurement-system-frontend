@@ -12,21 +12,21 @@ export default function NavBar() {
 
   return (
     <nav className="w-full bg-custom1 shadow">
-      <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+      <div className="mx-auto justify-between px-4 md:flex md:items-center md:px-8 lg:max-w-7xl">
         <div>
-          <div className="flex items-center justify-between py-3 md:py-5 md:block">
+          <div className="flex items-center justify-between py-3 md:block md:py-5">
             <span onClick={() => navigate("/")}>
               <h2 className="text-xl font-bold text-white">LOGO</h2>
             </span>
             <div className="md:hidden">
               <button
-                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                className="rounded-md p-2 text-gray-700 outline-none focus:border focus:border-gray-400"
                 onClick={() => setNavbar(!navbar)}
               >
                 {navbar ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-white"
+                    className="h-6 w-6 text-white"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -39,7 +39,7 @@ export default function NavBar() {
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-white"
+                    className="h-6 w-6 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -58,7 +58,7 @@ export default function NavBar() {
         </div>
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+            className={`mt-8 flex-1 justify-self-center pb-3 md:mt-0 md:block md:pb-0 ${
               navbar ? "block" : "hidden"
             }`}
           >
@@ -76,16 +76,16 @@ export default function NavBar() {
                 <span onClick={() => navigate("/")}>Contact US</span>
               </li>
             </ul>
-            <div className="mt-3 space-y-2 lg:hidden md:inline-block">
+            <div className="mt-3 space-y-2 md:inline-block lg:hidden">
               {user ? (
                 <div className="relative">
                   <button
-                    className="inline-block w-full text-gray-800 bg-custom4 hover:bg-gray-100 rounded-lg text-sm px-4 py-2.5 text-center items-center"
+                    className="inline-block w-full items-center rounded-lg bg-custom4 px-4 py-2.5 text-center text-sm text-gray-800 hover:bg-gray-100"
                     onClick={() => setShowDropdown(!showDropdown)}
                   >
                     {user.username}
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="ml-2 h-4 w-4"
                       aria-hidden="true"
                       fill="none"
                       stroke="currentColor"
@@ -103,13 +103,13 @@ export default function NavBar() {
                   {showDropdown && (
                     <div
                       id="dropdownList"
-                      className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-full top-12 left-0"
+                      className="absolute left-0 top-12 z-10 w-full divide-y divide-gray-100 rounded-lg bg-white shadow-lg"
                     >
                       <ul className="py-2 text-sm text-gray-800">
                         <li>
                           <button
                             onClick={() => navigate("/accounts/profile/")}
-                            className="block px-4 py-2 hover:bg-gray-100 w-full"
+                            className="block w-full px-4 py-2 hover:bg-gray-100"
                           >
                             Profile
                           </button>
@@ -117,7 +117,7 @@ export default function NavBar() {
                         <li>
                           <button
                             onClick={() => dispatch(logout())}
-                            className="block px-4 py-2 hover:bg-gray-100 w-full"
+                            className="block w-full px-4 py-2 hover:bg-gray-100"
                           >
                             Logout
                           </button>
@@ -130,13 +130,13 @@ export default function NavBar() {
                 <>
                   <span
                     onClick={() => navigate("/accounts/login/")}
-                    className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-custom4 rounded-md shadow hover:bg-gray-100"
+                    className="inline-block w-full rounded-md bg-custom4 px-4 py-2 text-center text-gray-800 shadow hover:bg-gray-100"
                   >
                     Login
                   </span>
                   <span
                     onClick={() => navigate("/accounts/register/")}
-                    className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                    className="inline-block w-full rounded-md bg-white px-4 py-2 text-center text-gray-800 shadow hover:bg-gray-100"
                   >
                     Register
                   </span>
@@ -149,12 +149,12 @@ export default function NavBar() {
           {user ? (
             <div className="relative">
               <button
-                className="text-gray-800 bg-custom4 hover:bg-gray-100 rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                className="inline-flex items-center rounded-lg bg-custom4 px-4 py-2.5 text-center text-sm text-gray-800 hover:bg-gray-100"
                 onClick={() => setShowDropdown(!showDropdown)}
               >
                 {user.username}
                 <svg
-                  className="w-4 h-4 ml-2"
+                  className="ml-2 h-4 w-4"
                   aria-hidden="true"
                   fill="none"
                   stroke="currentColor"
@@ -172,13 +172,13 @@ export default function NavBar() {
               {showDropdown && (
                 <div
                   id="dropdownList"
-                  className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-40 top-12 right-0"
+                  className="absolute right-0 top-12 z-10 w-40 divide-y divide-gray-100 rounded-lg bg-white shadow-lg"
                 >
                   <ul className="py-2 text-sm text-gray-800">
                     <li>
                       <button
                         onClick={() => navigate("/accounts/profile/")}
-                        className="block px-4 py-2 hover:bg-gray-100 w-full"
+                        className="block w-full px-4 py-2 hover:bg-gray-100"
                       >
                         Profile
                       </button>
@@ -186,7 +186,7 @@ export default function NavBar() {
                     <li>
                       <button
                         onClick={() => dispatch(logout())}
-                        className="block px-4 py-2 hover:bg-gray-100 w-full"
+                        className="block w-full px-4 py-2 hover:bg-gray-100"
                       >
                         Logout
                       </button>
@@ -199,13 +199,13 @@ export default function NavBar() {
             <>
               <span
                 onClick={() => navigate("/login")}
-                className="px-4 py-2 text-gray-800 bg-custom3 rounded-md shadow hover:bg-gray-100"
+                className="rounded-md bg-custom3 px-4 py-2 text-gray-800 shadow hover:bg-gray-100"
               >
                 Login
               </span>
               <span
                 onClick={() => navigate("/register")}
-                className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                className="rounded-md bg-white px-4 py-2 text-gray-800 shadow hover:bg-gray-100"
               >
                 Register
               </span>

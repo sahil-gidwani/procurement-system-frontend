@@ -83,12 +83,12 @@ const ProfileCard = ({
   };
 
   return (
-    <div className="overflow-hidden shadow rounded-lg border my-12 mx-auto lg:w-1/3 w-full p-3">
+    <div className="mx-auto my-12 w-full overflow-hidden rounded-lg border p-3 shadow lg:w-1/3">
       <div className="px-4 py-5 sm:px-6">
-        <div className="flex justify-center items-center">
+        <div className="flex items-center justify-center">
           <PiUserCircleLight size={60} className="text-custom2" />
         </div>
-        <h3 className="text-3xl leading-6 font-semibold text-gray-900 text-center py-3">
+        <h3 className="py-3 text-center text-3xl font-semibold leading-6 text-gray-900">
           User Profile
         </h3>
       </div>
@@ -97,27 +97,27 @@ const ProfileCard = ({
           {profileFields.map((field, index) => (
             <div
               key={index}
-              className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+              className="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5"
             >
               <dt className="text-sm font-semibold text-gray-600">
                 {field.label}
               </dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 {field.value}
               </dd>
             </div>
           ))}
         </dl>
       </div>
-      <div className="border-t border-gray-200 px-4 py-5 sm:p-0 flex justify-evenly">
+      <div className="flex justify-evenly border-t border-gray-200 px-4 py-5 sm:p-0">
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-4"
+          className="mt-4 rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-700"
           onClick={handleUpdate}
         >
           Update
         </button>
         <button
-          className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-4"
+          className="mt-4 rounded bg-red-500 px-4 py-2 font-semibold text-white hover:bg-red-700"
           onClick={handleDelete}
         >
           Delete

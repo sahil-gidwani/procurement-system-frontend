@@ -38,7 +38,7 @@ const currentYear = new Date().getFullYear();
 
 const Footer = () => {
   return (
-    <div className="w-full bg-custom1 text-gray-300 px-4">
+    <div className="w-full bg-custom1 px-4 text-gray-300">
       {/* <div className="max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-6 border-b-2 border-gray-600 py-8">
         {sections.map((section, index) => (
           <div key={index}>
@@ -69,9 +69,9 @@ const Footer = () => {
         </div>
       </div> */}
 
-      <div className="flex flex-col max-w-[1240px] px-4 py-2 mx-auto justify-between sm:flex-row text-center text-gray-300">
+      <div className="mx-auto flex max-w-[1240px] flex-col justify-between px-4 py-2 text-center text-gray-300 sm:flex-row">
         <p className="py-4">{currentYear} Workflow, LLC. All rights reserved</p>
-        <div className="flex justify-between sm:w-[300px] pt-4 text-xl">
+        <div className="flex justify-between pt-4 text-xl sm:w-[300px]">
           {items.map((x, index) => {
             return <x.icon key={index} className="hover:text-white" />;
           })}
