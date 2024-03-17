@@ -43,7 +43,7 @@ const fields = [
 const schema = z.object({
   demand: z
     .number()
-    .min(1, { message: "Annual demand must be greater than 0" }),
+    .min(0.01, { message: "Annual demand must be greater than 0" }),
   ordering_cost: z
     .number()
     .min(0.01, { message: "Ordering cost must be greater than 0" }),
