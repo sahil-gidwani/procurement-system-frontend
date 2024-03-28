@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import {
   FaFacebook,
   FaGithub,
@@ -73,7 +74,7 @@ const Footer = () => {
         <p className="py-4">{currentYear} Workflow, LLC. All rights reserved</p>
         <div className="flex justify-between pt-4 text-xl sm:w-[300px]">
           {items.map((x, index) => {
-            return <x.icon key={index} className="hover:text-white" />;
+            return <NavLink key={index} to={x.link} className="mx-2 hover:text-white">{<x.icon />}</NavLink>;
           })}
         </div>
       </div>

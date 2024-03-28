@@ -10,6 +10,7 @@ const Toast = Swal.mixin({
     toast.onmouseenter = Swal.stopTimer;
     toast.onmouseleave = Swal.resumeTimer;
   },
+  showCloseButton: true,
 });
 
 export default Toast;

@@ -4,10 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        custom1: "rgb(17, 35, 90)", // 11235A
-        custom2: "rgb(89, 111, 183)", // 596FB7
-        custom3: "rgb(198, 207, 155)", // C6CF9B
-        custom4: "rgb(246, 236, 169)", // F6ECA9
+        custom1: "rgb(18, 64, 118)",
+        custom2: "rgb(127, 159, 128)",
+        custom3: "rgb(249, 232, 151)",
+        custom4: "rgb(255, 195, 116)",
       },
       keyframes: {
         chase: {
