@@ -140,9 +140,9 @@ export default function NavBar() {
                     <span className="flex w-full items-center justify-center">
                       {user.username}
                       {showDropdown ? (
-                        <FaChevronUp className="ml-2 h-4 w-4" />
+                        <FaChevronUp className="ml-2 h-3 w-3" />
                       ) : (
-                        <FaChevronDown className="ml-2 h-4 w-4" />
+                        <FaChevronDown className="ml-2 h-3 w-3" />
                       )}
                     </span>
                   </button>
