@@ -1,70 +1,87 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { HiOutlineArrowCircleRight } from "react-icons/hi";
-import { MdOutlineLocalGroceryStore } from "react-icons/md";
+import { BiPurchaseTag } from "react-icons/bi";
 import useAxios from "../../utils/useAxios";
 import Toast from "../common/Toast";
 import FormHeader from "../common/FormHeader";
 
 const fields = [
   {
-    label: "Annual Demand",
-    id: "demand",
+    label: "Requisition ID",
+    id: "requisition_number",
+    type: "text",
+    gridCols: 1,
+  },
+  {
+    label: "Quantity Requested",
+    id: "quantity_requested",
     type: "number",
-    step: "0.01",
+    gridCols: 1,
+  },
+  {
+    label: "Expected Date of Delivery",
+    id: "expected_delivery_date",
+    type: "date",
+    gridCols: 1,
+  },
+  {
+    label: "Urgency Level",
+    id: "urgency_level",
+    type: "select",
+    options: [
+      { value: "low", label: "Low" },
+      { value: "medium", label: "Medium" },
+      { value: "high", label: "High" },
+    ],
+    gridCols: 1,
+  },
+  {
+    label: "Comments",
+    id: "comments",
+    type: "textarea",
     gridCols: 2,
   },
   {
-    label: "Ordering Cost per unit",
-    id: "ordering_cost",
-    type: "number",
-    step: "0.01",
-    gridCols: 1,
+    label: "Attachments",
+    id: "attachments",
+    type: "file",
+    gridCols: 2,
   },
   {
-    label: "Holding Cost per unit",
-    id: "holding_cost",
-    type: "number",
-    step: "0.01",
-    gridCols: 1,
-  },
-  {
-    label: "Lead Time (in days)",
-    id: "lead_time",
-    type: "number",
-    gridCols: 1,
-  },
-  {
-    label: "Service Level (0 to 1)",
-    id: "service_level",
-    type: "number",
-    step: "0.01",
-    gridCols: 1,
+    label: "Report",
+    id: "report",
+    type: "file",
+    gridCols: 2,
   },
 ];
 
 const schema = z.object({
-  demand: z
+  requisition_number: z
+    .string()
+    .min(1, { message: "Requisition ID is required" }),
+  quantity_requested: z
     .number()
-    .min(0.01, { message: "Annual demand must be greater than 0" }),
-  ordering_cost: z
-    .number()
-    .min(0.01, { message: "Ordering cost must be greater than 0" }),
-  holding_cost: z
-    .number()
-    .min(0.01, { message: "Holding cost must be greater than 0" }),
-  lead_time: z.number().min(1, { message: "Lead time must be greater than 0" }),
-  service_level: z
-    .number()
-    .min(0.01, { message: "Service level must be greater than 0" })
-    .max(1, { message: "Service level must be less than 1" }),
+    .int()
+    .min(1, { message: "Quantity requested must be at least 1" }),
+  expected_delivery_date: z.date().refine(
+    (date) => {
+      const today = new Date();
+      return date >= today;
+    },
+    { message: "Expected delivery date must be at least today's date" },
+  ),
+  urgency_level: z.string().min(1, { message: "Urgency level is required" }),
+  comments: z.string().nullable(),
+  attachments: z.any().nullable(),
+  report: z.any().nullable(),
 });
 
-export default function OptimizeInventoryCreateFormROP() {
+export default function PurchaseRequisitionUpdateForm() {
   const baseURL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { id } = useParams();
@@ -74,37 +91,80 @@ export default function OptimizeInventoryCreateFormROP() {
     resolver: zodResolver(schema),
     mode: "onTouched",
     defaultValues: {
-      demand: 0.0,
-      ordering_cost: 0.0,
-      holding_cost: 0.0,
-      lead_time: 0,
-      service_level: 0.0,
+      attachments: null,
+      report: null,
     },
   });
 
-  const { register, handleSubmit, formState, control, setError } = form;
+  const { register, handleSubmit, formState, control, setError, setValue } =
+    form;
 
   const { errors, isSubmitting, isValid } = formState;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`${baseURL}/purchase/purchase-requisitions/${id}/`);
+        const data = response.data;
+        // Set default values for all fields except the attachments and report fields
+        for (const field of fields) {
+          if (field.id !== "attachments" && field.id !== "report") {
+            setValue(field.id, data[field.id]);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = async (data) => {
     console.log(data);
 
+    data.expected_delivery_date = new Date(data.expected_delivery_date)
+      .toISOString()
+      .split("T")[0];
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      const field = fields.find((field) => field.id === key);
+      if (field && field.type === "file") {
+        if (value === null) {
+          return;
+        }
+        formData.append(key, value[0]);
+      } else {
+        formData.append(key, value);
+      }
+    });
+
     api
-      .post(`${baseURL}/inventory/optimize/${id}/create/`, data)
+      .put(
+        `${baseURL}/purchase/purchase-requisitions/${id}/update/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      )
       .then((response) => {
         console.log(response);
         Toast.fire({
           icon: "success",
-          title: "Optimize inventory item created successfully!",
+          title: "Purchase requisition updated successfully!",
         });
-        navigate("/inventory/list/");
+        navigate("/purchase/requisition/list/");
       })
       .catch((error) => {
         const errors = error.response.data;
-        console.error("Error posting data: ", errors);
+        console.error("Error updating data: ", errors);
         Toast.fire({
           icon: "error",
-          title: "Error creating optimize inventory item!",
+          title: "Error updating purchase requisition!",
         });
         Object.keys(errors).forEach((key) => {
           setError(key, {
@@ -139,9 +199,9 @@ export default function OptimizeInventoryCreateFormROP() {
       <div className="container mx-auto">
         <div className="mx-auto my-12 flex w-full flex-wrap justify-center rounded-lg p-6 pb-10 pt-5 shadow-2xl lg:w-7/12">
           <FormHeader
-            icon={MdOutlineLocalGroceryStore}
-            title="Create Optimize Inventory Item"
-            subTitle="Calculating Economic Order Quantity (EOQ) considering Reorder Point (ROP)"
+            icon={BiPurchaseTag}
+            title="Update Purchase Requisition"
+            subTitle="Fill in the form below to update a purchase requisition"
             linkText="Back to Inventory"
             navigateTo="/inventory/list/"
           />
@@ -200,6 +260,7 @@ export default function OptimizeInventoryCreateFormROP() {
                     <input
                       {...register(field.id, {
                         valueAsNumber: field.type === "number" ? true : false,
+                        valueAsDate: field.type === "date" ? true : false,
                       })}
                       className={`m-0 mb-1 w-full max-w-full rounded-md border border-gray-300 px-4 py-3 text-sm font-semibold outline-none focus:border-blue-500 md:mb-0 md:px-4 md:py-3 ${
                         field.gridCols === 2 ? "md:w-full" : ""

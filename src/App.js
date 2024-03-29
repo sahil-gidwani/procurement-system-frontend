@@ -16,11 +16,16 @@ import InventoryList from "./pages/inventory/InventoryList";
 import InventoryCreate from "./pages/inventory/InventoryCreate";
 import InventoryView from "./pages/inventory/InventoryView";
 import InventoryUpdate from "./pages/inventory/InventoryUpdate";
-import HistoricalInventory from "./pages/inventory/HistoricalInventory";
-import ForecastInventory from "./pages/inventory/ForecastInventory";
-import OptimizeInventoryView from "./pages/inventory/OptimizeInventoryView";
-import OptimizeInventoryCreate from "./pages/inventory/OptimizeInventoryCreate";
-import OptimizeInventoryUpdate from "./pages/inventory/OptimizeInventoryUpdate";
+import HistoricalInventory from "./pages/inventory/historical/HistoricalInventory";
+import ForecastInventory from "./pages/inventory/forecast/ForecastInventory";
+import OptimizeInventoryView from "./pages/inventory/optimize/OptimizeInventoryView";
+import OptimizeInventoryCreate from "./pages/inventory/optimize/OptimizeInventoryCreate";
+import OptimizeInventoryUpdate from "./pages/inventory/optimize/OptimizeInventoryUpdate";
+import PurchaseRequisitionListProcurementOfficer from "./pages/purchase/PurchaseRequisitionListProcurementOfficer";
+import PurchaseRequisitionView from "./pages/purchase/PurchaseRequisitionView";
+import PurchaseRequisitionCreate from "./pages/purchase/PurchaseRequisitionCreate";
+import PurchaseRequisitionUpdate from "./pages/purchase/PurchaseRequisitionUpdate";
+import PurchaseRequisitionListVendor from "./pages/purchase/PurchaseRequisitionListVendor";
 
 function App() {
   return (
@@ -55,18 +60,27 @@ function App() {
                   element={<HistoricalInventory />}
                 />
                 <Route path="forecast/:id" element={<ForecastInventory />} />
-                <Route
-                  path="optimize/:id"
-                  element={<OptimizeInventoryView />}
-                />
-                <Route
-                  path="optimize/:id/create"
-                  element={<OptimizeInventoryCreate />}
-                />
-                <Route
-                  path="optimize/:id/update"
-                  element={<OptimizeInventoryUpdate />}
-                />
+                <Route path="optimize/:id">
+                  <Route path="" element={<OptimizeInventoryView />} />
+                  <Route path="create" element={<OptimizeInventoryCreate />} />
+                  <Route path="update" element={<OptimizeInventoryUpdate />} />
+                </Route>
+              </Route>
+            </Route>
+            <Route path="purchase">
+              <Route path="requisition">
+                <Route element={<ProtectedRoute role="procurement_officer" />}>
+                  <Route path="list" element={<PurchaseRequisitionListProcurementOfficer />} />
+                  <Route
+                    path="create/:inventory_id"
+                    element={<PurchaseRequisitionCreate />}
+                  />
+                  <Route path="view/:id" element={<PurchaseRequisitionView />} />
+                  <Route path="update/:id" element={<PurchaseRequisitionUpdate />} />
+                </Route>
+                <Route element={<ProtectedRoute role="vendor" />}>
+                  <Route path="vendor-list" element={<PurchaseRequisitionListVendor />} />
+                </Route>
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />

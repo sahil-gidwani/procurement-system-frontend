@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import useAxios from "../../utils/useAxios";
-import OptimizeInventoryCard from "../../components/cards/OptimizeInventoryCard";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
+import useAxios from "../../../utils/useAxios";
+import OptimizeInventoryCard from "../../../components/cards/OptimizeInventoryCard";
+import LoadingSpinner from "../../../components/common/LoadingSpinner";
 
 const OptimizeInventoryView = () => {
   const baseURL = process.env.REACT_APP_API_URL;

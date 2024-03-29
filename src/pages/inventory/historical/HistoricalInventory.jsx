@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router";
-import useAxios from "../../utils/useAxios";
-import Table from "../../components/tables/Table";
-import Toast from "../../components/common/Toast";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
+import useAxios from "../../../utils/useAxios";
+import Table from "../../../components/tables/Table";
+import Toast from "../../../components/common/Toast";
+import LoadingSpinner from "../../../components/common/LoadingSpinner";
 
 const HistoricalInventory = () => {
   const baseURL = process.env.REACT_APP_API_URL;
@@ -59,7 +59,7 @@ const HistoricalInventory = () => {
     fetchHistoricalInventory();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const data = useMemo(() => historicalInventory, [historicalInventory]);
+  const data = historicalInventory;
 
   const backButton = {
     label: "Inventory List",

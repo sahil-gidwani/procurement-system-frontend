@@ -1,5 +1,5 @@
 import React from "react";
-import ForecastInventoryForm from "../../components/forms/ForecastInventoryForm";
+import ForecastInventoryForm from "../../../components/forms/ForecastInventoryForm";
 
 const ForecastInventory = () => {
   return <ForecastInventoryForm />;

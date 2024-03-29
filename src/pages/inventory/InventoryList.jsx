@@ -47,6 +47,9 @@ const InventoryList = () => {
   };
 
   const getActions = (value, navigate, handleDelete) => [
+    { label: "View", action: () => navigate(`/inventory/view/${value}/`) },
+    { label: "Update", action: () => navigate(`/inventory/update/${value}/`) },
+    { label: "Delete", action: () => handleDelete(value) },
     {
       label: "Historical Logs",
       action: () => navigate(`/inventory/historical/${value}/`),
@@ -59,9 +62,10 @@ const InventoryList = () => {
       label: "Optimize",
       action: () => navigate(`/inventory/optimize/${value}/`),
     },
-    { label: "View", action: () => navigate(`/inventory/view/${value}/`) },
-    { label: "Update", action: () => navigate(`/inventory/update/${value}/`) },
-    { label: "Delete", action: () => handleDelete(value) },
+    {
+      label: "Create Purchase Requisition",
+      action: () => navigate(`/purchase/requisition/create/${value}/`),
+    }
   ];
 
   // TODO: Fix the download of grouped columns
@@ -189,8 +193,8 @@ const InventoryList = () => {
     fetchInventory();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const data = useMemo(() => inventory, [inventory]);
-
+  const data = inventory;
+  
   const createButton = {
     label: "Add Item",
     action: () => {
