@@ -5,19 +5,19 @@ import useAxios from "../../utils/useAxios";
 import Toast from "../../components/common/Toast";
 import { BiPurchaseTag } from "react-icons/bi";
 import { TiAttachment } from "react-icons/ti";
-import { HiOutlineDocumentReport } from "react-icons/hi";
 
-const RequisitionCard = ({
+const BidCard = ({
   id,
   requisitionNumber,
-  quantityRequested,
-  expectedDeliveryDate,
-  urgencyLevel,
+  vendor,
+  vendorRating,
+  totalRatings,
+  quantityFulfilled,
+  unitPrice,
+  dateSubmitted,
+  daysToDeliver,
   comments,
-  dateCreated,
-  lastUpdated,
   attachments,
-  report,
   status,
 }) => {
   const baseURL = process.env.REACT_APP_API_URL;
@@ -25,22 +25,24 @@ const RequisitionCard = ({
   const navigate = useNavigate();
 
   const inventoryFields = [
-    { label: "Requisition ID", value: requisitionNumber },
-    { label: "Quantity Requested", value: quantityRequested },
     {
-      label: "Expected Date of Delivery",
-      value: new Date(expectedDeliveryDate).toLocaleDateString(),
+      label: "Requisition ID",
+      value: requisitionNumber ? requisitionNumber : null,
     },
-    { label: "Urgency Level", value: urgencyLevel },
+    { label: "Vendor", value: vendor ? vendor : null },
+    { label: "Vendor Rating", value: vendorRating ? vendorRating : null },
+    { label: "Total Ratings", value: totalRatings ? totalRatings : null },
+    { label: "Quantity Fulfilled", value: quantityFulfilled },
+    { label: "Unit Price", value: unitPrice },
+    {
+      label: "Date Submitted",
+      value: new Date(dateSubmitted).toLocaleDateString(),
+    },
+    {
+      label: "Days to Deliver",
+      value: daysToDeliver,
+    },
     { label: "Comments", value: comments },
-    {
-      label: "Date Created",
-      value: new Date(dateCreated).toLocaleDateString(),
-    },
-    {
-      label: "Last Updated",
-      value: new Date(lastUpdated).toLocaleDateString(),
-    },
     {
       label: "Attachments",
       value:
@@ -55,31 +57,17 @@ const RequisitionCard = ({
           </a>
         ) : null,
     },
-    {
-      label: "Report",
-      value:
-        report != null ? (
-          <a
-            href={report}
-            target="_blank"
-            rel="noreferrer"
-            className="text-gray-500"
-          >
-            <HiOutlineDocumentReport className="text-xl" />
-          </a>
-        ) : null,
-    },
     { label: "Status", value: status },
   ].filter((field) => field.value !== null);
 
   const handleUpdate = () => {
-    navigate(`/purchase/requisition/update/${id}/`);
+    navigate(`/purchase/bid/update/${id}/`);
   };
 
   const handleDelete = async () => {
     const result = await Swal.fire({
       title: "Are you sure?",
-      text: "You are about to delete this requisition permanently. This action cannot be undone!",
+      text: "You are about to delete this bid permanently. This action cannot be undone!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
@@ -90,20 +78,18 @@ const RequisitionCard = ({
 
     if (result.isConfirmed) {
       try {
-        await api.delete(
-          `${baseURL}/purchase/purchase-requisitions/${id}/delete/`,
-        );
+        await api.delete(`${baseURL}/purchase/supplier-bids/${id}/delete/`);
 
         Toast.fire({
           icon: "success",
-          title: "Requisition deleted successfully!",
+          title: "Bid deleted successfully!",
         });
       } catch (error) {
-        console.error("Error deleting requisition:", error);
+        console.error("Error deleting bid:", error);
 
         Toast.fire({
           icon: "error",
-          title: "Error deleting requisition!",
+          title: "Error deleting bid!",
         });
       }
     }
@@ -116,7 +102,7 @@ const RequisitionCard = ({
           <BiPurchaseTag size={60} className="text-custom2" />
         </div>
         <h3 className="py-3 text-center text-3xl font-semibold leading-6 text-gray-900">
-          Requisition Details
+          Bid Details
         </h3>
       </div>
       <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
@@ -154,4 +140,4 @@ const RequisitionCard = ({
   );
 };
 
-export default RequisitionCard;
+export default BidCard;

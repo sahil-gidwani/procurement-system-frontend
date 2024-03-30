@@ -3,12 +3,12 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { TiAttachment } from "react-icons/ti";
 import { HiOutlineDocumentReport } from "react-icons/hi";
-import useAxios from "../../utils/useAxios";
-import Table from "../../components/tables/Table";
-import Toast from "../../components/common/Toast";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
-import ActionsCell from "../../components/tables/ActionsCell";
-import StatusPill from "../../components/tables/StatusPill";
+import useAxios from "../../../utils/useAxios";
+import Table from "../../../components/tables/Table";
+import Toast from "../../../components/common/Toast";
+import LoadingSpinner from "../../../components/common/LoadingSpinner";
+import ActionsCell from "../../../components/tables/ActionsCell";
+import StatusPill from "../../../components/tables/StatusPill";
 
 const PurchaseRequisitionListProcurementOfficer = () => {
   const baseURL = process.env.REACT_APP_API_URL;
@@ -31,7 +31,9 @@ const PurchaseRequisitionListProcurementOfficer = () => {
 
     if (result.isConfirmed) {
       try {
-        await api.delete(`${baseURL}/purchase/purchase-requisitions/${value}/delete/`);
+        await api.delete(
+          `${baseURL}/purchase/purchase-requisitions/${value}/delete/`,
+        );
 
         Toast.fire({
           icon: "success",
@@ -55,13 +57,21 @@ const PurchaseRequisitionListProcurementOfficer = () => {
       action: () => navigate(`/purchase/requisition/view/${value}/`),
     },
     {
-        label: "Update",
-        action: () => navigate(`/purchase/requisition/update/${value}/`),
+      label: "Update",
+      action: () => navigate(`/purchase/requisition/update/${value}/`),
     },
     {
       label: "Delete",
       action: () => handleDelete(value),
     },
+    {
+      label: "View Bids",
+      action: () => navigate(`/purchase/bid/procurement-officer-list/${value}`),
+    },
+    {
+      label: "Rank Bids",
+      action: () => navigate(`/purchase/bid/rank/${value}`),
+    }
   ];
 
   const columns = useMemo(
@@ -166,6 +176,29 @@ const PurchaseRequisitionListProcurementOfficer = () => {
           ),
       },
       {
+        Header: "Status",
+        accessor: "status",
+        Cell: ({ value }) => (
+          <StatusPill
+            value={value}
+            colorMap={{
+              pending: {
+                backgroundColor: "bg-yellow-100",
+                textColor: "text-yellow-800",
+              },
+              approved: {
+                backgroundColor: "bg-green-100",
+                textColor: "text-green-800",
+              },
+              rejected: {
+                backgroundColor: "bg-red-100",
+                textColor: "text-red-800",
+              },
+            }}
+          />
+        ),
+      },
+      {
         Header: "Actions",
         accessor: "id",
         Cell: ({ value }) => (
@@ -201,12 +234,24 @@ const PurchaseRequisitionListProcurementOfficer = () => {
 
   const data = requsitions;
 
+  const backButton = {
+    label: "Inventory List",
+    action: () => {
+      navigate("/inventory/list/");
+    },
+  };
+
   return (
     <>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <Table data={data} columns={columns} title="Purchase Requisitions" />
+        <Table
+          data={data}
+          columns={columns}
+          title="Purchase Requisitions"
+          createButton={backButton}
+        />
       )}
     </>
   );

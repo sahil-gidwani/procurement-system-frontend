@@ -2,12 +2,12 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { TiAttachment } from "react-icons/ti";
 import { HiOutlineDocumentReport } from "react-icons/hi";
-import useAxios from "../../utils/useAxios";
-import Table from "../../components/tables/Table";
-import Toast from "../../components/common/Toast";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
-import ActionsCell from "../../components/tables/ActionsCell";
-import StatusPill from "../../components/tables/StatusPill";
+import useAxios from "../../../utils/useAxios";
+import Table from "../../../components/tables/Table";
+import Toast from "../../../components/common/Toast";
+import LoadingSpinner from "../../../components/common/LoadingSpinner";
+import ActionsCell from "../../../components/tables/ActionsCell";
+import StatusPill from "../../../components/tables/StatusPill";
 
 const PurchaseRequisitionListVendor = () => {
   const baseURL = process.env.REACT_APP_API_URL;
@@ -19,7 +19,7 @@ const PurchaseRequisitionListVendor = () => {
   const getActions = (value, navigate) => [
     {
       label: "Submit Bid",
-      action: () => navigate(`/inventory/historical/${value}/`),
+      action: () => navigate(`/purchase/bid/create/${value}/`),
     },
   ];
 

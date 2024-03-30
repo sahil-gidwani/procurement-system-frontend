@@ -193,6 +193,8 @@ const InventoryList = () => {
     fetchInventory();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // TODO: Fix the memoization and caching issue - when I delete an item the memoization OR caching returns old data figure out which one
+  // const data = useMemo(() => inventory, [inventory]);
   const data = inventory;
   
   const createButton = {

@@ -14,10 +14,10 @@ const FormHeader = ({
       <h1 className="mb-3 mt-2 text-3xl font-bold">{title}</h1>
       <p className="font-semibold text-gray-500">
         {subTitle}{" "}
-        <NavLink className="text-custom1" to={navigateTo}>
+      </p>
+      <NavLink className="font-semibold text-custom1" to={navigateTo}>
           {linkText}
         </NavLink>
-      </p>
     </div>
   );
 };

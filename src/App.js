@@ -21,11 +21,18 @@ import ForecastInventory from "./pages/inventory/forecast/ForecastInventory";
 import OptimizeInventoryView from "./pages/inventory/optimize/OptimizeInventoryView";
 import OptimizeInventoryCreate from "./pages/inventory/optimize/OptimizeInventoryCreate";
 import OptimizeInventoryUpdate from "./pages/inventory/optimize/OptimizeInventoryUpdate";
-import PurchaseRequisitionListProcurementOfficer from "./pages/purchase/PurchaseRequisitionListProcurementOfficer";
-import PurchaseRequisitionView from "./pages/purchase/PurchaseRequisitionView";
-import PurchaseRequisitionCreate from "./pages/purchase/PurchaseRequisitionCreate";
-import PurchaseRequisitionUpdate from "./pages/purchase/PurchaseRequisitionUpdate";
-import PurchaseRequisitionListVendor from "./pages/purchase/PurchaseRequisitionListVendor";
+import PurchaseRequisitionListProcurementOfficer from "./pages/purchase/requisition/PurchaseRequisitionListProcurementOfficer";
+import PurchaseRequisitionView from "./pages/purchase/requisition/PurchaseRequisitionView";
+import PurchaseRequisitionCreate from "./pages/purchase/requisition/PurchaseRequisitionCreate";
+import PurchaseRequisitionUpdate from "./pages/purchase/requisition/PurchaseRequisitionUpdate";
+import PurchaseRequisitionListVendor from "./pages/purchase/requisition/PurchaseRequisitionListVendor";
+import SupplierBidListProcurementOfficer from "./pages/purchase/bid/SupplierBidListProcurementOfficer";
+import SupplierBidViewProcurementOfficer from "./pages/purchase/bid/SupplierBidViewProcurementOfficer";
+import SupplierBidRank from "./pages/purchase/bid/SupplierBidRank";
+import SupplierBidListVendor from "./pages/purchase/bid/SupplierBidListVendor";
+import SupplierBidCreate from "./pages/purchase/bid/SupplierBidCreate";
+import SupplierBidViewVendor from "./pages/purchase/bid/SupplierBidViewVendor";
+import SupplierBidUpdate from "./pages/purchase/bid/SupplierBidUpdate";
 
 function App() {
   return (
@@ -70,16 +77,53 @@ function App() {
             <Route path="purchase">
               <Route path="requisition">
                 <Route element={<ProtectedRoute role="procurement_officer" />}>
-                  <Route path="list" element={<PurchaseRequisitionListProcurementOfficer />} />
+                  <Route
+                    path="list"
+                    element={<PurchaseRequisitionListProcurementOfficer />}
+                  />
                   <Route
                     path="create/:inventory_id"
                     element={<PurchaseRequisitionCreate />}
                   />
-                  <Route path="view/:id" element={<PurchaseRequisitionView />} />
-                  <Route path="update/:id" element={<PurchaseRequisitionUpdate />} />
+                  <Route
+                    path="view/:id"
+                    element={<PurchaseRequisitionView />}
+                  />
+                  <Route
+                    path="update/:id"
+                    element={<PurchaseRequisitionUpdate />}
+                  />
                 </Route>
                 <Route element={<ProtectedRoute role="vendor" />}>
-                  <Route path="vendor-list" element={<PurchaseRequisitionListVendor />} />
+                  <Route
+                    path="vendor-list"
+                    element={<PurchaseRequisitionListVendor />}
+                  />
+                </Route>
+              </Route>
+              <Route path="bid">
+                <Route element={<ProtectedRoute role="procurement_officer" />}>
+                  <Route
+                    path="procurement-officer-list/:requisition_id"
+                    element={<SupplierBidListProcurementOfficer />}
+                  />
+                  <Route
+                    path="rank/:requisition_id"
+                    element={<SupplierBidRank />}
+                  />
+                  <Route
+                    path="procurement-officer-view/:id"
+                    element={<SupplierBidViewProcurementOfficer />}
+                  />
+                </Route>
+                <Route element={<ProtectedRoute role="vendor" />}>
+                  <Route path="list" element={<SupplierBidListVendor />} />
+                  <Route
+                    path="create/:requisition_id"
+                    element={<SupplierBidCreate />}
+                  />
+                  <Route path="view/:id" element={<SupplierBidViewVendor />} />
+                  <Route path="update/:id" element={<SupplierBidUpdate />} />
                 </Route>
               </Route>
             </Route>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import useAxios from "../../utils/useAxios";
-import Toast from "../../components/common/Toast";
-import RequisitionCard from "../../components/cards/RequisitionCard";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
+import useAxios from "../../../utils/useAxios";
+import Toast from "../../../components/common/Toast";
+import RequisitionCard from "../../../components/cards/RequisitionCard";
+import LoadingSpinner from "../../../components/common/LoadingSpinner";
 
 const PurchaseRequisitionView = () => {
   const baseURL = process.env.REACT_APP_API_URL;
@@ -42,6 +42,7 @@ const PurchaseRequisitionView = () => {
             lastUpdated={requisition.last_updated}
             attachments={requisition?.attachments}
             report={requisition?.report}
+            status={requisition.status}
         />
       ) : (
         <LoadingSpinner />

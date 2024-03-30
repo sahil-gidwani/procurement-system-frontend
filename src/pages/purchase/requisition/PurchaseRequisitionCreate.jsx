@@ -1,5 +1,5 @@
 import React from "react";
-import PurchaseRequisitionCreateForm from "../../components/forms/PurchaseRequisitionCreateForm";
+import PurchaseRequisitionCreateForm from "../../../components/forms/PurchaseRequisitionCreateForm";
 
 const PurchaseRequisitionCreate = () => {
   return <PurchaseRequisitionCreateForm />;
