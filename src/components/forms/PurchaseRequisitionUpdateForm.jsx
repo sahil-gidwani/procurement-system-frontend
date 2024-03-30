@@ -202,8 +202,6 @@ export default function PurchaseRequisitionUpdateForm() {
             icon={BiPurchaseTag}
             title="Update Purchase Requisition"
             subTitle="Fill in the form below to update a purchase requisition"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

@@ -184,8 +184,6 @@ export default function PurchaseRequisitionCreateForm() {
             icon={BiPurchaseTag}
             title="Create Purchase Requisition"
             subTitle="Fill in the form below to create a purchase requisition"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

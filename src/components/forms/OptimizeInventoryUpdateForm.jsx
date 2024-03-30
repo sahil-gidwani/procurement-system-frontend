@@ -162,9 +162,6 @@ export default function OptimizeInventoryUpdateForm() {
           <FormHeader
             icon={MdOutlineLocalGroceryStore}
             title="Update Optimize Inventory Item"
-            subTitle="Return to the List of Inventory Items"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

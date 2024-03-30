@@ -95,6 +95,28 @@ const BidCard = ({
     }
   };
 
+  const renderButtons = () => {
+    if (requisitionNumber) {
+      return (
+        <div className="flex justify-evenly border-t border-gray-200 px-4 py-5 sm:p-0">
+          <button
+            className="mt-4 rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-700"
+            onClick={handleUpdate}
+          >
+            Update
+          </button>
+          <button
+            className="mt-4 rounded bg-red-500 px-4 py-2 font-semibold text-white hover:bg-red-700"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="mx-auto my-12 w-full overflow-hidden rounded-lg border p-3 shadow lg:w-1/3">
       <div className="px-4 py-5 sm:px-6">
@@ -122,20 +144,7 @@ const BidCard = ({
           ))}
         </dl>
       </div>
-      <div className="flex justify-evenly border-t border-gray-200 px-4 py-5 sm:p-0">
-        <button
-          className="mt-4 rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-700"
-          onClick={handleUpdate}
-        >
-          Update
-        </button>
-        <button
-          className="mt-4 rounded bg-red-500 px-4 py-2 font-semibold text-white hover:bg-red-700"
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
-      </div>
+      {renderButtons()}
     </div>
   );
 };

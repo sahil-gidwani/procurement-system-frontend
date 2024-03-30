@@ -122,8 +122,6 @@ export default function OptimizeInventoryCreateFormClassical() {
             icon={MdOutlineLocalGroceryStore}
             title="Create Optimize Inventory Item"
             subTitle="Calculating Economic Order Quantity (EOQ) using Classical Model"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

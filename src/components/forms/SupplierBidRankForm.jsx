@@ -370,8 +370,6 @@ export default function SupplierBidRankForm() {
                 icon={BiPurchaseTag}
                 title="Rank Bids"
                 subTitle="Please enter the weights for each criterion to rank the bids. The sum of all weights must be exactly 1."
-                linkText="Back to Purchase Requisitions"
-                navigateTo="/purchase/requisition/list/"
               />
               <form
                 onSubmit={handleSubmit(onSubmit)}

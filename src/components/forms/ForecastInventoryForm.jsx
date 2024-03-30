@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,7 +40,6 @@ const schema = z.object({
 
 export default function ForecastInventoryForm() {
   const baseURL = process.env.REACT_APP_API_URL;
-  const navigate = useNavigate();
   const api = useAxios();
   const { id } = useParams();
   const [data, setData] = useState({});
@@ -270,24 +269,34 @@ export default function ForecastInventoryForm() {
                 {Number(data?.annual_forecast).toLocaleString()}{" "}
               </div>
             </div>
-            <Plot
-              data={JSON.parse(data?.decomposed)?.data}
-              layout={JSON.parse(data?.decomposed)?.layout}
-              useResizeHandler
-              style={{ width: "100%" }}
-            />
-            <Plot
-              data={JSON.parse(data?.graph)?.data}
-              layout={JSON.parse(data?.graph)?.layout}
-              useResizeHandler
-              style={{ width: "100%" }}
-            />
-            <button
-              className="flex max-w-max items-center rounded bg-green-500 px-4 py-2 font-semibold text-white hover:bg-green-700"
-              onClick={() => navigate("/inventory/list/")}
-            >
-              Inventory List
-            </button>
+            <div className="w-full">
+              <Plot
+                data={JSON.parse(data?.decomposed)?.data}
+                layout={JSON.parse(data?.decomposed)?.layout}
+                useResizeHandler
+                style={{ width: "100%" }}
+              />
+              <p className="mb-4 font-semibold text-gray-500">
+                The plot above provides a breakdown of the time series data,
+                revealing underlying patterns such as long-term trends,
+                recurring seasonal fluctuations, and irregular residual
+                variations.
+              </p>
+            </div>
+            <div className="w-full">
+              <Plot
+                data={JSON.parse(data?.graph)?.data}
+                layout={JSON.parse(data?.graph)?.layout}
+                useResizeHandler
+                style={{ width: "100%" }}
+              />
+              <p className="mb-4 font-semibold text-gray-500">
+                This plot presents a forecast of future data points based on
+                historical trends, offering valuable insights into potential
+                future outcomes and assisting in informed decision-making and
+                planning.
+              </p>
+            </div>
           </div>
         </div>
       )}

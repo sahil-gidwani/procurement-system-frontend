@@ -132,8 +132,6 @@ export default function OptimizeInventoryCreateFormStorage() {
             icon={MdOutlineLocalGroceryStore}
             title="Create Optimize Inventory Item"
             subTitle="Calculating Economic Order Quantity (EOQ) for Limited Storage Space"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

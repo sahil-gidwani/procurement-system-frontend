@@ -193,9 +193,6 @@ export default function InventoryUpdateForm() {
           <FormHeader
             icon={MdOutlineLocalGroceryStore}
             title="Update Item"
-            subTitle="Return to the List of Inventory Items"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

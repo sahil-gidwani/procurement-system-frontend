@@ -132,8 +132,6 @@ export default function OptimizeInventoryCreateFormPerishable() {
             icon={MdOutlineLocalGroceryStore}
             title="Create Optimize Inventory Item"
             subTitle="Calculating Economic Order Quantity (EOQ) for Perishable Items"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

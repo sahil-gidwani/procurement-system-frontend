@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import useAxios from "../../../utils/useAxios";
 import Table from "../../../components/tables/Table";
 import Toast from "../../../components/common/Toast";
@@ -7,7 +7,6 @@ import LoadingSpinner from "../../../components/common/LoadingSpinner";
 
 const HistoricalInventory = () => {
   const baseURL = process.env.REACT_APP_API_URL;
-  const navigate = useNavigate();
   const api = useAxios();
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -61,13 +60,6 @@ const HistoricalInventory = () => {
 
   const data = historicalInventory;
 
-  const backButton = {
-    label: "Inventory List",
-    action: () => {
-      navigate("/inventory/list/");
-    },
-  };
-
   return (
     <>
       {isLoading ? (
@@ -76,8 +68,7 @@ const HistoricalInventory = () => {
         <Table
           data={data}
           columns={columns}
-          title="Inventory Table"
-          createButton={backButton}
+          title="Historical Inventory Logs"
         />
       )}
     </>

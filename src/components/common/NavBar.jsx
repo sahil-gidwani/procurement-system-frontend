@@ -14,12 +14,23 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const menus = [
+  const unauthenticated_menus = [
     { name: "Home", link: "/" },
-    { name: "About", link: "/about" },
-    { name: "Services", link: "/services" },
-    { name: "Contact", link: "/contact" },
   ];
+
+  const procurement_officer_menus = [
+    { name: "Home", link: "/" },
+    { name: "Inventory", link: "/inventory/list" },
+    { name: "Requisitions", link: "/purchase/requisition/list" },
+  ];
+
+  const vendor_menus = [
+    { name: "Home", link: "/" },
+    { name: "Requisitions", link: "/purchase/requisition/vendor-list" },
+    { name: "Bids", link: "/purchase/bid/list" },
+  ];
+  
+  const menus = user?.user_role === "procurement_officer" ? procurement_officer_menus : (user?.user_role === "vendor" ? vendor_menus : unauthenticated_menus);
 
   const dropdownMenus = [
     { name: "Profile", link: "/accounts/profile" },

@@ -176,9 +176,6 @@ export default function InventoryCreateForm() {
           <FormHeader
             icon={MdOutlineLocalGroceryStore}
             title="Add Item"
-            subTitle="Return to the List of Inventory Items"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

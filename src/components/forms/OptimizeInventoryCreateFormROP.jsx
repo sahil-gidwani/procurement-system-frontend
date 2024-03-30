@@ -142,8 +142,6 @@ export default function OptimizeInventoryCreateFormROP() {
             icon={MdOutlineLocalGroceryStore}
             title="Create Optimize Inventory Item"
             subTitle="Calculating Economic Order Quantity (EOQ) considering Reorder Point (ROP)"
-            linkText="Back to Inventory"
-            navigateTo="/inventory/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}

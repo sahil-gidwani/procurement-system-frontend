@@ -234,13 +234,6 @@ const PurchaseRequisitionListProcurementOfficer = () => {
 
   const data = requsitions;
 
-  const backButton = {
-    label: "Inventory List",
-    action: () => {
-      navigate("/inventory/list/");
-    },
-  };
-
   return (
     <>
       {isLoading ? (
@@ -250,7 +243,6 @@ const PurchaseRequisitionListProcurementOfficer = () => {
           data={data}
           columns={columns}
           title="Purchase Requisitions"
-          createButton={backButton}
         />
       )}
     </>

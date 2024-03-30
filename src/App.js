@@ -5,6 +5,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import NavBar from "./components/common/NavBar";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/common/Footer";
+import Home from "./pages/Home";
 import Register from "./pages/accounts/Register";
 import Login from "./pages/accounts/Login";
 import PasswordReset from "./pages/accounts/PasswordReset";
@@ -41,7 +42,7 @@ function App() {
         <NavBar />
         <div className="min-h-screen flex-grow">
           <Routes>
-            <Route path="/" element={<NotFound />} />
+            <Route path="/" element={<Home />} />
             <Route path="accounts">
               <Route path="register" element={<Register />} />
               <Route path="login" element={<Login />} />

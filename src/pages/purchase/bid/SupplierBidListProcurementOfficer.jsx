@@ -222,13 +222,6 @@ const SupplierBidListProcurementOfficer = () => {
 
   const data = bids;
 
-  const backButton = {
-    label: "Purchase Requisitions List",
-    action: () => {
-      navigate("/purchase/requisition/list/");
-    },
-  };
-
   return (
     <>
       {isLoading ? (
@@ -238,7 +231,6 @@ const SupplierBidListProcurementOfficer = () => {
           data={data}
           columns={columns}
           title="Bids Table"
-          createButton={backButton}
         />
       )}
     </>

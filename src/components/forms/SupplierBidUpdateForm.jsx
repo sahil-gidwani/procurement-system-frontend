@@ -176,8 +176,6 @@ export default function SupplierBidUpdateForm() {
             icon={BiPurchaseTag}
             title="Update Bid"
             subTitle="Fill in the form below to update the bid for the purchase requisition"
-            linkText="Back to Purchase Requisitions"
-            navigateTo="/purchase/requisition/list/"
           />
           <form
             onSubmit={handleSubmit(onSubmit)}
