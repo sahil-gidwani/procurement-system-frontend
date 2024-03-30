@@ -22,12 +22,14 @@ export default function NavBar() {
     { name: "Home", link: "/" },
     { name: "Inventory", link: "/inventory/list" },
     { name: "Requisitions", link: "/purchase/requisition/list" },
+    { name: "Orders", link: "/purchase/order/list" },
   ];
 
   const vendor_menus = [
     { name: "Home", link: "/" },
     { name: "Requisitions", link: "/purchase/requisition/vendor-list" },
     { name: "Bids", link: "/purchase/bid/list" },
+    { name: "Orders", link: "/purchase/order/vendor-list" },
   ];
   
   const menus = user?.user_role === "procurement_officer" ? procurement_officer_menus : (user?.user_role === "vendor" ? vendor_menus : unauthenticated_menus);

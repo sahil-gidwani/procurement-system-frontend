@@ -1,12 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  FaFacebook,
-  FaGithub,
-  FaInstagram,
-  FaTwitter,
-  FaTwitch,
-} from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 // const sections = [
 //   {
@@ -27,12 +21,25 @@ import {
 //   },
 // ];
 
+// const items = [
+//   { name: "Facebook", icon: FaFacebook, link: "https://www.facebook.com/" },
+//   { name: "Instagram", icon: FaInstagram, link: "https://www.instagram.com/" },
+//   { name: "Twitter", icon: FaTwitter, link: "https://twitter.com/" },
+//   { name: "Twitch", icon: FaTwitch, link: "https://www.twitch.tv/" },
+//   { name: "Github", icon: FaGithub, link: "https://github.com/" },
+//   { name: "Linkedin", icon: FaLinkedin, link: "https://www.linkedin.com/" },
+// ];
+
 const items = [
-  { name: "Facebook", icon: FaFacebook, link: "https://www.facebook.com/" },
-  { name: "Instagram", icon: FaInstagram, link: "https://www.instagram.com/" },
-  { name: "Twitter", icon: FaTwitter, link: "https://twitter.com/" },
-  { name: "Twitch", icon: FaTwitch, link: "https://www.twitch.tv/" },
-  { name: "Github", icon: FaGithub, link: "https://github.com/" },
+  { icon: FaLinkedin, link: "https://www.linkedin.com/in/sahil-gidwani/" },
+  {
+    icon: FaGithub,
+    link: "https://github.com/sahil-gidwani/procurement-system-backend",
+  },
+  {
+    icon: FaGithub,
+    link: "https://github.com/sahil-gidwani/procurement-system-frontend",
+  },
 ];
 
 const currentYear = new Date().getFullYear();
@@ -71,10 +78,21 @@ const Footer = () => {
       </div> */}
 
       <div className="mx-auto flex max-w-[1240px] flex-col justify-between px-4 py-2 text-center text-gray-300 sm:flex-row">
-        <p className="py-4">{currentYear} Workflow, LLC. All rights reserved</p>
+        <p className="py-4">
+          {currentYear} ProcurEase, &copy; All rights reserved
+        </p>
         <div className="flex justify-between pt-4 text-xl sm:w-[300px]">
           {items.map((x, index) => {
-            return <NavLink key={index} to={x.link} className="mx-2 hover:text-white">{<x.icon />}</NavLink>;
+            return (
+              <NavLink
+                target="_blank"
+                key={index}
+                to={x.link}
+                className="mx-2 hover:text-white"
+              >
+                {<x.icon />}
+              </NavLink>
+            );
           })}
         </div>
       </div>

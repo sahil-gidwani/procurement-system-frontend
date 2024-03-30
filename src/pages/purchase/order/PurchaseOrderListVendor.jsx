@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { TiAttachment } from "react-icons/ti";
 import useAxios from "../../../utils/useAxios";
 import Table from "../../../components/tables/Table";
 import Toast from "../../../components/common/Toast";
@@ -9,21 +8,20 @@ import LoadingSpinner from "../../../components/common/LoadingSpinner";
 import ActionsCell from "../../../components/tables/ActionsCell";
 import StatusPill from "../../../components/tables/StatusPill";
 
-const SupplierBidListProcurementOfficer = () => {
+const PurchaseOrderListVendor = () => {
   const baseURL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
-  const { requisition_id } = useParams();
   const api = useAxios();
   const [isLoading, setIsLoading] = useState(false);
-  const [bids, setBids] = useState([]);
+  const [orders, setOrders] = useState([]);
 
-  const handleAccept = async (value) => {
+  const handleShipped = async (value) => {
     const result = await Swal.fire({
       title: "Are you sure?",
-      text: "You are about to accept the bid which will automatically reject all other submitted bids. This action cannot be undone!",
+      text: "You are about to change the status to shipped. This action cannot be undone!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, accept it!",
+      confirmButtonText: "Yes, change it!",
       cancelButtonText: "No, cancel",
       reverseButtons: true,
       focusCancel: true,
@@ -32,34 +30,34 @@ const SupplierBidListProcurementOfficer = () => {
     if (result.isConfirmed) {
       try {
         await api.put(
-          `${baseURL}/purchase/supplier-bids/procurement-officer/${value}/status/`,
+          `${baseURL}/purchase/purchase-orders/vendor/${value}/status/`,
           {
-            status: "accepted",
+            status: "shipped",
           },
         );
 
         Toast.fire({
           icon: "success",
-          title: "Bid accepted successfully!",
+          title: "Order status changed to shipped successfully!",
         });
       } catch (error) {
-        console.error("Error accepting bid:", error);
+        console.error("Error changing status:", error);
 
         Toast.fire({
           icon: "error",
-          title: "Error accepting bid!",
+          title: "Error changing status to shipped!",
         });
       }
     }
   };
 
-  const handleReject = async (value) => {
+  const handleDelivered = async (value) => {
     const result = await Swal.fire({
       title: "Are you sure?",
-      text: "You are about to reject the bid. This action cannot be undone!",
+      text: "You are about to change the status to delivered. This action cannot be undone!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, reject it!",
+      confirmButtonText: "Yes, change it!",
       cancelButtonText: "No, cancel",
       reverseButtons: true,
       focusCancel: true,
@@ -68,50 +66,54 @@ const SupplierBidListProcurementOfficer = () => {
     if (result.isConfirmed) {
       try {
         await api.put(
-          `${baseURL}/purchase/supplier-bids/procurement-officer/${value}/status/`,
+          `${baseURL}/purchase/purchase-orders/vendor/${value}/status/`,
           {
-            status: "rejected",
+            status: "delivered",
           },
         );
 
         Toast.fire({
           icon: "success",
-          title: "Bid rejected successfully!",
+          title: "Order status changed to delivered successfully!",
         });
       } catch (error) {
-        console.error("Error rejecting bid:", error);
+        console.error("Error changing status:", error);
 
         Toast.fire({
           icon: "error",
-          title: "Error rejecting bid!",
+          title: "Error changing status to delivered!",
         });
       }
     }
   };
 
-  const getActions = (value, navigate, handleAccept, handleReject) => [
+  const getActions = (value, navigate, handleShipped, handleDelivered) => [
     {
       label: "View",
       action: () =>
         navigate(`/purchase/bid/procurement-officer-view/${value}/`),
     },
-    { label: "Accept", action: () => handleAccept(value) },
-    { label: "Reject", action: () => handleReject(value) },
+    { label: "Shipped", action: () => handleShipped(value) },
+    { label: "Delivered", action: () => handleDelivered(value) },
   ];
 
   const columns = useMemo(
     () => [
+    {
+        Header: "Order ID",
+        accessor: "order_number",
+    },
       {
-        Header: "Quantity Fulfilled",
-        accessor: "quantity_fulfilled",
+        Header: "Quantity Ordered",
+        accessor: "quantity_ordered",
       },
       {
         Header: "Unit Price",
         accessor: "unit_price",
       },
       {
-        Header: "Date Submitted",
-        accessor: "date_submitted",
+        Header: "Expected Date of Delivery",
+        accessor: "expected_delivery_date",
         Cell: ({ value }) => (
           <span className="text-sm text-gray-500">
             {new Date(value).toLocaleDateString()}
@@ -119,44 +121,17 @@ const SupplierBidListProcurementOfficer = () => {
         ),
       },
       {
-        Header: "Days to Deliver",
-        accessor: "days_delivery",
-      },
-      {
-        Header: "Vendor",
-        accessor: "supplier_company_name",
-      },
-      {
-        Header: "Vendor Rating",
-        accessor: "supplier_rating",
-      },
-      {
-        Header: "Total Ratings",
-        accessor: "total_ratings",
-      },
-      {
-        Header: "Comments",
-        accessor: "comments",
+        Header: "Date Ordered",
+        accessor: "date_ordered",
         Cell: ({ value }) => (
-          <span className="overflow-hidden overflow-ellipsis text-sm text-gray-500">
-            {value ? value : "N/A"}
+          <span className="text-sm text-gray-500">
+            {new Date(value).toLocaleDateString()}
           </span>
         ),
       },
       {
-        Header: "Attachments",
-        accessor: "attachments",
-        Cell: ({ value }) =>
-          value && (
-            <a
-              href={value}
-              target="_blank"
-              rel="noreferrer"
-              className="text-gray-500"
-            >
-              <TiAttachment className="text-xl" />
-            </a>
-          ),
+        Header: "Delivery Location",
+        accessor: "delivery_location",
       },
       {
         Header: "Status",
@@ -165,15 +140,15 @@ const SupplierBidListProcurementOfficer = () => {
           <StatusPill
             value={value}
             colorMap={{
-              accepted: {
+              delivered: {
                 backgroundColor: "bg-green-100",
                 textColor: "text-green-800",
               },
-              submitted: {
+              shipped: {
                 backgroundColor: "bg-yellow-100",
                 textColor: "text-yellow-800",
               },
-              rejected: {
+              pending: {
                 backgroundColor: "bg-red-100",
                 textColor: "text-red-800",
               },
@@ -187,7 +162,7 @@ const SupplierBidListProcurementOfficer = () => {
         Cell: ({ value }) => (
           <ActionsCell
             value={value}
-            actions={getActions(value, navigate, handleAccept, handleReject)}
+            actions={getActions(value, navigate, handleShipped, handleDelivered)}
           />
         ),
       },
@@ -197,28 +172,28 @@ const SupplierBidListProcurementOfficer = () => {
   );
 
   useEffect(() => {
-    const fetchBids = async () => {
+    const fetchOrders = async () => {
       setIsLoading(true);
       try {
         const response = await api.get(
-          `${baseURL}/purchase/supplier-bids/procurement-officer/list/${requisition_id}/`,
+          `${baseURL}/purchase/purchase-orders/vendor/list/`,
         );
-        setBids(response.data);
+        setOrders(response.data);
       } catch (error) {
-        console.error("Error fetching bids:", error);
+        console.error("Error fetching orders:", error);
         Toast.fire({
           icon: "error",
-          title: "Error fetching bids!",
+          title: "Error fetching orders!",
         });
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchBids();
+    fetchOrders();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const data = bids;
+  const data = orders;
 
   return (
     <>
@@ -228,11 +203,11 @@ const SupplierBidListProcurementOfficer = () => {
         <Table
           data={data}
           columns={columns}
-          title="Bids Table"
+          title="Purchase Orders Table"
         />
       )}
     </>
   );
 };
 
-export default SupplierBidListProcurementOfficer;
+export default PurchaseOrderListVendor;
