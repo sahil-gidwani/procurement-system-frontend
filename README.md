@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/assets/ProcurEase-logo-yellow-tagline.png" alt="AquaProbe Logo" width="100">
+  <img src="src/assets/ProcurEase-logo-yellow-tagline.png" alt="AquaProbe Logo" width="500">
 </p>
 
 ## Deployment Status
