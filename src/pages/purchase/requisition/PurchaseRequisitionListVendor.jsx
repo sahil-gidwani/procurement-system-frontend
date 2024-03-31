@@ -145,7 +145,7 @@ const PurchaseRequisitionListVendor = () => {
       setIsLoading(true);
       try {
         const response = await api.get(
-          `${baseURL}/purchase/purcase-requisitions/vendor/list/`,
+          `${baseURL}/purchase/purchase-requisitions/vendor/list/`,
         );
         setRequisitions(response.data);
       } catch (error) {
