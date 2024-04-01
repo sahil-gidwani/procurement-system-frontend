@@ -351,13 +351,6 @@ export default function SupplierBidRankForm() {
     return [];
   }, [data]);
 
-  const backButton = {
-    label: "Purchase Requisitions List",
-    action: () => {
-      navigate("/purchase/requisition/list/");
-    },
-  };
-
   return (
     <>
       {isLoading ? (
@@ -469,7 +462,7 @@ export default function SupplierBidRankForm() {
         </>
       ) : (
         <>
-          <Table data={tableData} columns={columns} title="Bids Ranked" createButton={backButton} />
+          <Table data={tableData} columns={columns} title="Bids Ranked"/>
           <div className="container mx-auto">
             <div className="mx-auto my-12 flex w-full flex-wrap justify-center rounded-lg p-6 pb-10 pt-5 shadow-2xl lg:w-3/4">
               <div className="w-full text-center">

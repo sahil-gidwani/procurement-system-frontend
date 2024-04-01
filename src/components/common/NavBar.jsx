@@ -14,8 +14,11 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const unauthenticated_menus = [
+  const unauthenticated_menus = [{ name: "Home", link: "/" }];
+
+  const admin_menus = [
     { name: "Home", link: "/" },
+    { name: "Dashboard", link: "/dashboard/admin" },
   ];
 
   const procurement_officer_menus = [
@@ -23,6 +26,7 @@ export default function NavBar() {
     { name: "Inventory", link: "/inventory/list" },
     { name: "Requisitions", link: "/purchase/requisition/list" },
     { name: "Orders", link: "/purchase/order/list" },
+    { name: "Dashboard", link: "/dashboard/procurement-officer" },
   ];
 
   const vendor_menus = [
@@ -30,9 +34,16 @@ export default function NavBar() {
     { name: "Requisitions", link: "/purchase/requisition/vendor-list" },
     { name: "Bids", link: "/purchase/bid/list" },
     { name: "Orders", link: "/purchase/order/vendor-list" },
+    { name: "Dashboard", link: "/dashboard/vendor" },
   ];
-  
-  const menus = user?.user_role === "procurement_officer" ? procurement_officer_menus : (user?.user_role === "vendor" ? vendor_menus : unauthenticated_menus);
+
+  const menus = user?.is_superuser
+    ? admin_menus
+    : user?.user_role === "procurement_officer"
+      ? procurement_officer_menus
+      : user?.user_role === "vendor"
+        ? vendor_menus
+        : unauthenticated_menus;
 
   const dropdownMenus = [
     { name: "Profile", link: "/accounts/profile" },

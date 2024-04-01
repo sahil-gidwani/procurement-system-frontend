@@ -36,6 +36,9 @@ import SupplierBidViewVendor from "./pages/purchase/bid/SupplierBidViewVendor";
 import SupplierBidUpdate from "./pages/purchase/bid/SupplierBidUpdate";
 import PurchaseOrderListProcurementOfficer from "./pages/purchase/order/PurchaseOrderListProcurementOfficer";
 import PurchaseOrderListVendor from "./pages/purchase/order/PurchaseOrderListVendor";
+import AdminDashboard from "./pages/dashboard/AdminDashboard";
+import ProcurementOfficerDashboard from "./pages/dashboard/ProcurementOfficerDashboard";
+import VendorDashboard from "./pages/dashboard/VendorDashboard";
 
 function App() {
   return (
@@ -137,8 +140,28 @@ function App() {
                   />
                 </Route>
                 <Route element={<ProtectedRoute role="vendor" />}>
-                  <Route path="vendor-list" element={<PurchaseOrderListVendor />} />
+                  <Route
+                    path="vendor-list"
+                    element={<PurchaseOrderListVendor />}
+                  />
                 </Route>
+              </Route>
+            </Route>
+            <Route path="dashboard">
+              <Route element={<ProtectedRoute role="admin" />}>
+                <Route path="admin" element={<AdminDashboard />} />
+              </Route>
+              <Route element={<ProtectedRoute role="procurement_officer" />}>
+                <Route
+                  path="procurement-officer"
+                  element={<ProcurementOfficerDashboard />}
+                />
+              </Route>
+              <Route element={<ProtectedRoute role="vendor" />}>
+                <Route
+                  path="vendor"
+                  element={<VendorDashboard />}
+                />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
