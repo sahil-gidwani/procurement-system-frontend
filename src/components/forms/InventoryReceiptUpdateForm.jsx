@@ -64,9 +64,11 @@ export default function InventoryReceiptUpdateForm() {
     resolver: zodResolver(schema),
     mode: "onTouched",
     defaultValues: async () => {
-        const response = await api.get(`${baseURL}/logistics/inventory-receipt/${id}/`);
-        return response.data;
-      },
+      const response = await api.get(
+        `${baseURL}/logistics/inventory-receipt/${id}/`,
+      );
+      return response.data;
+    },
   });
 
   const { register, handleSubmit, formState, control, setError } = form;
@@ -77,10 +79,7 @@ export default function InventoryReceiptUpdateForm() {
     console.log(data);
 
     api
-      .put(
-        `${baseURL}/logistics/inventory-receipt/${id}/update/`,
-        data,
-      )
+      .put(`${baseURL}/logistics/inventory-receipt/${id}/update/`, data)
       .then((response) => {
         console.log(response);
         Toast.fire({

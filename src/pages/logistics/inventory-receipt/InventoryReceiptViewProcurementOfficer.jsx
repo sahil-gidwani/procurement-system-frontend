@@ -14,7 +14,9 @@ const InventoryReceiptViewProcurementOfficer = () => {
   useEffect(() => {
     const fetchReceipt = async () => {
       try {
-        const response = await api.get(`${baseURL}/logistics/inventory-receipt/${id}/`);
+        const response = await api.get(
+          `${baseURL}/logistics/inventory-receipt/${id}/`,
+        );
         setReceipt(response.data);
       } catch (error) {
         console.error("Error fetching receipt:", error);
@@ -31,15 +33,15 @@ const InventoryReceiptViewProcurementOfficer = () => {
   return (
     <>
       {receipt ? (
-        <InventoryReceiptCard 
-            id={receipt.id}
-            receiptId={receipt.receipt_id}  
-            receiptDate={receipt.receipt_date}
-            receivedQuantity={receipt.received_quantity}
-            receivedCondition={receipt.received_condition}
-            inspectionNotes={receipt?.inspection_notes}
-            inspectionReport={receipt?.inspection_report}
-            showButtons={true}
+        <InventoryReceiptCard
+          id={receipt.id}
+          receiptId={receipt.receipt_id}
+          receiptDate={receipt.receipt_date}
+          receivedQuantity={receipt.received_quantity}
+          receivedCondition={receipt.received_condition}
+          inspectionNotes={receipt?.inspection_notes}
+          inspectionReport={receipt?.inspection_report}
+          showButtons={true}
         />
       ) : (
         <LoadingSpinner />

@@ -90,8 +90,10 @@ export default function InvoiceUpdateForm() {
 
     // Format the payment_due_date to "YYYY-MM-DD" format
     const formattedData = {
-        ...data,
-        payment_due_date: new Date(data.payment_due_date).toISOString().split('T')[0]
+      ...data,
+      payment_due_date: new Date(data.payment_due_date)
+        .toISOString()
+        .split("T")[0],
     };
 
     api

@@ -190,10 +190,7 @@ export default function InventoryUpdateForm() {
     <>
       <div className="container mx-auto">
         <div className="mx-auto my-12 flex w-full flex-wrap justify-center rounded-lg p-6 pb-10 pt-5 shadow-2xl lg:w-7/12">
-          <FormHeader
-            icon={MdOutlineLocalGroceryStore}
-            title="Update Item"
-          />
+          <FormHeader icon={MdOutlineLocalGroceryStore} title="Update Item" />
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="m-auto flex w-full flex-col items-center justify-start"

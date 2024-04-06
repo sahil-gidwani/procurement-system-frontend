@@ -108,7 +108,9 @@ export default function PurchaseRequisitionCreateForm() {
   const onSubmit = async (data) => {
     console.log(data);
 
-    data.expected_delivery_date = new Date(data.expected_delivery_date).toISOString().split('T')[0];
+    data.expected_delivery_date = new Date(data.expected_delivery_date)
+      .toISOString()
+      .split("T")[0];
     const formData = new FormData();
 
     Object.entries(data).forEach(([key, value]) => {

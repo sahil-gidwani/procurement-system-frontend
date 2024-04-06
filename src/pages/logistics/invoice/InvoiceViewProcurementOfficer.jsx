@@ -14,7 +14,9 @@ const InvoiceViewProcurementOfficer = () => {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await api.get(`${baseURL}/logistics/invoice/procurement-officer/${id}/`);
+        const response = await api.get(
+          `${baseURL}/logistics/invoice/procurement-officer/${id}/`,
+        );
         setInvoice(response.data);
       } catch (error) {
         console.error("Error fetching invoice:", error);
@@ -31,17 +33,17 @@ const InvoiceViewProcurementOfficer = () => {
   return (
     <>
       {invoice ? (
-        <InvoiceCard 
-            id={invoice.id}
-            invoiceNumber={invoice.invoice_number}
-            invoiceDate={invoice.invoice_date}
-            accountNumber={invoice.account_number}
-            totalAmount={invoice.total_amount}
-            paymentDueDate={invoice.payment_due_date}
-            paymentMode={invoice.payment_mode}
-            paymentStatus={invoice.payment_status}
-            invoiceReport={invoice?.invoice_report}
-            showButtons={false}
+        <InvoiceCard
+          id={invoice.id}
+          invoiceNumber={invoice.invoice_number}
+          invoiceDate={invoice.invoice_date}
+          accountNumber={invoice.account_number}
+          totalAmount={invoice.total_amount}
+          paymentDueDate={invoice.payment_due_date}
+          paymentMode={invoice.payment_mode}
+          paymentStatus={invoice.payment_status}
+          invoiceReport={invoice?.invoice_report}
+          showButtons={false}
         />
       ) : (
         <LoadingSpinner />

@@ -19,9 +19,9 @@ const VendorDashboard = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
         Toast.fire({
-            icon: "error",
-            title: "Error fetching dashboard data!",
-          });
+          icon: "error",
+          title: "Error fetching dashboard data!",
+        });
       } finally {
         setIsLoading(false);
       }
@@ -38,19 +38,14 @@ const VendorDashboard = () => {
         <div className="container mx-auto">
           <div className="mx-auto my-12 flex w-full flex-wrap justify-center rounded-lg p-6 pb-10 pt-5 shadow-2xl lg:w-3/4">
             <div className="w-full text-center">
-              <h1 className="mb-6 mt-4 text-4xl font-bold">
-                Vendor Dashboard
-              </h1>
+              <h1 className="mb-6 mt-4 text-4xl font-bold">Vendor Dashboard</h1>
               <p className="mb-4 font-semibold text-gray-500">
-                This dashboard provides an overview of the vendor's
-                activities.
+                This dashboard provides an overview of the vendor's activities.
               </p>
             </div>
-            <hr className="border border-gray-300 w-full my-6"/>
+            <hr className="my-6 w-full border border-gray-300" />
             <div className="w-full text-center">
-              <h1 className="mb-6 mt-4 text-2xl font-bold">
-                Total Bids
-              </h1>
+              <h1 className="mb-6 mt-4 text-2xl font-bold">Total Bids</h1>
               <div className="mx-auto flex max-w-max items-center justify-center rounded-md bg-blue-500 px-8 py-4 text-xl font-bold text-white">
                 {Number(data?.total_supplier_bids).toLocaleString()}{" "}
               </div>

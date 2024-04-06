@@ -175,11 +175,7 @@ const SupplierBidListVendor = () => {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <Table
-          data={data}
-          columns={columns}
-          title="Bids Table"
-        />
+        <Table data={data} columns={columns} title="Bids Table" />
       )}
     </>
   );

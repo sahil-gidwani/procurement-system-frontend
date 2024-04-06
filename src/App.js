@@ -207,22 +207,10 @@ function App() {
                   />
                 </Route>
                 <Route element={<ProtectedRoute role="vendor" />}>
-                  <Route
-                    path="list"
-                    element={<InvoiceListVendor />}
-                  />
-                  <Route
-                    path="create/:order_id"
-                    element={<InvoiceCreate />}
-                  />
-                  <Route
-                    path="view/:id"
-                    element={<InvoiceViewVendor />}
-                  />
-                  <Route
-                    path="update/:id"
-                    element={<InvoiceUpdate />}
-                  />
+                  <Route path="list" element={<InvoiceListVendor />} />
+                  <Route path="create/:order_id" element={<InvoiceCreate />} />
+                  <Route path="view/:id" element={<InvoiceViewVendor />} />
+                  <Route path="update/:id" element={<InvoiceUpdate />} />
                 </Route>
               </Route>
             </Route>

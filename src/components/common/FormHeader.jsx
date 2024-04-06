@@ -12,12 +12,10 @@ const FormHeader = ({
     <div className="pb-12 text-center">
       <Icon size={60} className="mx-auto text-custom2" />
       <h1 className="mb-3 mt-2 text-3xl font-bold">{title}</h1>
-      <p className="font-semibold text-gray-500">
-        {subTitle}{" "}
-      </p>
+      <p className="font-semibold text-gray-500">{subTitle} </p>
       <NavLink className="font-semibold text-custom1" to={navigateTo}>
-          {linkText}
-        </NavLink>
+        {linkText}
+      </NavLink>
     </div>
   );
 };

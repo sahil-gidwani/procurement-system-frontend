@@ -18,7 +18,8 @@ const InventoryReceiptListVendor = () => {
   const getActions = (value, navigate, handleDelete) => [
     {
       label: "View",
-      action: () => navigate(`/logistics/inventory-receipt/vendor-view/${value}/`),
+      action: () =>
+        navigate(`/logistics/inventory-receipt/vendor-view/${value}/`),
     },
   ];
 
@@ -88,10 +89,7 @@ const InventoryReceiptListVendor = () => {
         Header: "Actions",
         accessor: "id",
         Cell: ({ value }) => (
-          <ActionsCell
-            value={value}
-            actions={getActions(value, navigate)}
-          />
+          <ActionsCell value={value} actions={getActions(value, navigate)} />
         ),
       },
     ],

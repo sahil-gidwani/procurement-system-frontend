@@ -65,7 +65,7 @@ const InventoryList = () => {
     {
       label: "Create Purchase Requisition",
       action: () => navigate(`/purchase/requisition/create/${value}/`),
-    }
+    },
   ];
 
   // TODO: Fix the download of grouped columns
@@ -196,7 +196,7 @@ const InventoryList = () => {
   // TODO: Fix the memoization and caching issue - when I delete an item the memoization OR caching returns old data figure out which one
   // const data = useMemo(() => inventory, [inventory]);
   const data = inventory;
-  
+
   const createButton = {
     label: "Add Item",
     action: () => {

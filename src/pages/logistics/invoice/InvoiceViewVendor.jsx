@@ -31,17 +31,17 @@ const InvoiceViewVendor = () => {
   return (
     <>
       {invoice ? (
-        <InvoiceCard 
-            id={invoice.id}
-            invoiceNumber={invoice.invoice_number}
-            invoiceDate={invoice.invoice_date}
-            accountNumber={invoice.account_number}
-            totalAmount={invoice.total_amount}
-            paymentDueDate={invoice.payment_due_date}
-            paymentMode={invoice.payment_mode}
-            paymentStatus={invoice.payment_status}
-            invoiceReport={invoice?.invoice_report}
-            showButtons={true}
+        <InvoiceCard
+          id={invoice.id}
+          invoiceNumber={invoice.invoice_number}
+          invoiceDate={invoice.invoice_date}
+          accountNumber={invoice.account_number}
+          totalAmount={invoice.total_amount}
+          paymentDueDate={invoice.payment_due_date}
+          paymentMode={invoice.payment_mode}
+          paymentStatus={invoice.payment_status}
+          invoiceReport={invoice?.invoice_report}
+          showButtons={true}
         />
       ) : (
         <LoadingSpinner />

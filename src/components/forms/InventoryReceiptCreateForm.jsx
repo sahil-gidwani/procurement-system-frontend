@@ -79,10 +79,7 @@ export default function InventoryReceiptCreateForm() {
     console.log(data);
 
     api
-      .post(
-        `${baseURL}/logistics/inventory-receipt/create/${order_id}/`,
-        data,
-      )
+      .post(`${baseURL}/logistics/inventory-receipt/create/${order_id}/`, data)
       .then((response) => {
         console.log(response);
         Toast.fire({

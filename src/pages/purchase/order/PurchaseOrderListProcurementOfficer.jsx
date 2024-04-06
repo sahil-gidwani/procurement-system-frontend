@@ -17,17 +17,16 @@ const PurchaseOrderListProcurementOfficer = () => {
   const getActions = (value, navigate) => [
     {
       label: "Create Inventory Receipt",
-      action: () =>
-        navigate(`/logistics/inventory-receipt/create/${value}/`),
+      action: () => navigate(`/logistics/inventory-receipt/create/${value}/`),
     },
   ];
 
   const columns = useMemo(
     () => [
-    {
+      {
         Header: "Order ID",
         accessor: "order_number",
-    },
+      },
       {
         Header: "Quantity Ordered",
         accessor: "quantity_ordered",
@@ -85,10 +84,7 @@ const PurchaseOrderListProcurementOfficer = () => {
         Header: "Actions",
         accessor: "id",
         Cell: ({ value }) => (
-          <ActionsCell
-            value={value}
-            actions={getActions(value, navigate)}
-          />
+          <ActionsCell value={value} actions={getActions(value, navigate)} />
         ),
       },
     ],
@@ -125,11 +121,7 @@ const PurchaseOrderListProcurementOfficer = () => {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <Table
-          data={data}
-          columns={columns}
-          title="Purchase Orders Table"
-        />
+        <Table data={data} columns={columns} title="Purchase Orders Table" />
       )}
     </>
   );

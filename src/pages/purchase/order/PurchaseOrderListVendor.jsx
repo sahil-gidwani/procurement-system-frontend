@@ -92,17 +92,16 @@ const PurchaseOrderListVendor = () => {
     { label: "Delivered", action: () => handleDelivered(value) },
     {
       label: "Create Invoice",
-      action: () =>
-        navigate(`/logistics/invoice/create/${value}/`),
+      action: () => navigate(`/logistics/invoice/create/${value}/`),
     },
   ];
 
   const columns = useMemo(
     () => [
-    {
+      {
         Header: "Order ID",
         accessor: "order_number",
-    },
+      },
       {
         Header: "Quantity Ordered",
         accessor: "quantity_ordered",
@@ -162,7 +161,12 @@ const PurchaseOrderListVendor = () => {
         Cell: ({ value }) => (
           <ActionsCell
             value={value}
-            actions={getActions(value, navigate, handleShipped, handleDelivered)}
+            actions={getActions(
+              value,
+              navigate,
+              handleShipped,
+              handleDelivered,
+            )}
           />
         ),
       },
@@ -200,11 +204,7 @@ const PurchaseOrderListVendor = () => {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <Table
-          data={data}
-          columns={columns}
-          title="Purchase Orders Table"
-        />
+        <Table data={data} columns={columns} title="Purchase Orders Table" />
       )}
     </>
   );

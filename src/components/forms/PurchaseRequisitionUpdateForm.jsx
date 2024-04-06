@@ -104,7 +104,9 @@ export default function PurchaseRequisitionUpdateForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get(`${baseURL}/purchase/purchase-requisitions/${id}/`);
+        const response = await api.get(
+          `${baseURL}/purchase/purchase-requisitions/${id}/`,
+        );
         const data = response.data;
         // Set default values for all fields except the attachments and report fields
         for (const field of fields) {

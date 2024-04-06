@@ -1,4 +1,4 @@
-import {React, useEffect} from "react";
+import { React, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { DevTool } from "@hookform/devtools";
@@ -74,14 +74,17 @@ export default function SupplierBidUpdateForm() {
     },
   });
 
-  const { register, handleSubmit, formState, control, setError, setValue } = form;
+  const { register, handleSubmit, formState, control, setError, setValue } =
+    form;
 
   const { errors, isSubmitting, isValid } = formState;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get(`${baseURL}/purchase/supplier-bids/${id}/`);
+        const response = await api.get(
+          `${baseURL}/purchase/supplier-bids/${id}/`,
+        );
         const data = response.data;
         // Set default values for all fields except the attachments and report fields
         for (const field of fields) {
@@ -116,15 +119,11 @@ export default function SupplierBidUpdateForm() {
     });
 
     api
-      .put(
-        `${baseURL}/purchase/supplier-bids/${id}/update/`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+      .put(`${baseURL}/purchase/supplier-bids/${id}/update/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-      )
+      })
       .then((response) => {
         console.log(response);
         Toast.fire({

@@ -71,7 +71,7 @@ const PurchaseRequisitionListProcurementOfficer = () => {
     {
       label: "Rank Bids",
       action: () => navigate(`/purchase/bid/rank/${value}`),
-    }
+    },
   ];
 
   const columns = useMemo(
@@ -239,11 +239,7 @@ const PurchaseRequisitionListProcurementOfficer = () => {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <Table
-          data={data}
-          columns={columns}
-          title="Purchase Requisitions"
-        />
+        <Table data={data} columns={columns} title="Purchase Requisitions" />
       )}
     </>
   );

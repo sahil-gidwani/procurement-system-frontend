@@ -14,7 +14,9 @@ const PurchaseRequisitionView = () => {
   useEffect(() => {
     const fetchRequisition = async () => {
       try {
-        const response = await api.get(`${baseURL}/purchase/purchase-requisitions/${id}/`);
+        const response = await api.get(
+          `${baseURL}/purchase/purchase-requisitions/${id}/`,
+        );
         setRequisition(response.data);
       } catch (error) {
         console.error("Error fetching requisition:", error);
@@ -31,18 +33,18 @@ const PurchaseRequisitionView = () => {
   return (
     <>
       {requisition ? (
-        <RequisitionCard 
-            id={requisition.id}
-            requisitionNumber={requisition.requisition_number}
-            quantityRequested={requisition.quantity_requested}
-            expectedDeliveryDate={requisition.expected_delivery_date}
-            urgencyLevel={requisition.urgency_level}
-            comments={requisition?.comments}
-            dateCreated={requisition.date_created}
-            lastUpdated={requisition.last_updated}
-            attachments={requisition?.attachments}
-            report={requisition?.report}
-            status={requisition.status}
+        <RequisitionCard
+          id={requisition.id}
+          requisitionNumber={requisition.requisition_number}
+          quantityRequested={requisition.quantity_requested}
+          expectedDeliveryDate={requisition.expected_delivery_date}
+          urgencyLevel={requisition.urgency_level}
+          comments={requisition?.comments}
+          dateCreated={requisition.date_created}
+          lastUpdated={requisition.last_updated}
+          attachments={requisition?.attachments}
+          report={requisition?.report}
+          status={requisition.status}
         />
       ) : (
         <LoadingSpinner />

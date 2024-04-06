@@ -19,9 +19,9 @@ const ProcurementOfficerDashboard = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
         Toast.fire({
-            icon: "error",
-            title: "Error fetching dashboard data!",
-          });
+          icon: "error",
+          title: "Error fetching dashboard data!",
+        });
       } finally {
         setIsLoading(false);
       }
@@ -46,7 +46,7 @@ const ProcurementOfficerDashboard = () => {
                 activities.
               </p>
             </div>
-            <hr className="border border-gray-300 w-full my-6"/>
+            <hr className="my-6 w-full border border-gray-300" />
             <div className="w-full text-center">
               <h1 className="mb-6 mt-4 text-2xl font-bold">
                 Total Inventory Items
