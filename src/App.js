@@ -36,6 +36,19 @@ import SupplierBidViewVendor from "./pages/purchase/bid/SupplierBidViewVendor";
 import SupplierBidUpdate from "./pages/purchase/bid/SupplierBidUpdate";
 import PurchaseOrderListProcurementOfficer from "./pages/purchase/order/PurchaseOrderListProcurementOfficer";
 import PurchaseOrderListVendor from "./pages/purchase/order/PurchaseOrderListVendor";
+import InventoryReceiptListProcurementOfficer from "./pages/logistics/inventory-receipt/InventoryReceiptListProcurementOfficer";
+import InventoryReceiptCreate from "./pages/logistics/inventory-receipt/InventoryReceiptCreate";
+import InventoryReceiptViewProcurementOfficer from "./pages/logistics/inventory-receipt/InventoryReceiptViewProcurementOfficer";
+import InventoryReceiptUpdate from "./pages/logistics/inventory-receipt/InventoryReceiptUpdate";
+import InventoryReceiptListVendor from "./pages/logistics/inventory-receipt/InventoryReceiptListVendor";
+import InventoryReceiptViewVendor from "./pages/logistics/inventory-receipt/InventoryReceiptViewVendor";
+import InvoiceListProcurementOfficer from "./pages/logistics/invoice/InvoiceListProcurementOfficer";
+import InvoiceViewProcurementOfficer from "./pages/logistics/invoice/InvoiceViewProcurementOfficer";
+import InvoiceVendorRating from "./pages/logistics/invoice/InvoiceVendorRating";
+import InvoiceListVendor from "./pages/logistics/invoice/InvoiceListVendor";
+import InvoiceCreate from "./pages/logistics/invoice/InvoiceCreate";
+import InvoiceViewVendor from "./pages/logistics/invoice/InvoiceViewVendor";
+import InvoiceUpdate from "./pages/logistics/invoice/InvoiceUpdate";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import ProcurementOfficerDashboard from "./pages/dashboard/ProcurementOfficerDashboard";
 import VendorDashboard from "./pages/dashboard/VendorDashboard";
@@ -147,6 +160,72 @@ function App() {
                 </Route>
               </Route>
             </Route>
+            <Route path="logistics">
+              <Route path="inventory-receipt">
+                <Route element={<ProtectedRoute role="procurement_officer" />}>
+                  <Route
+                    path="list"
+                    element={<InventoryReceiptListProcurementOfficer />}
+                  />
+                  <Route
+                    path="create/:order_id"
+                    element={<InventoryReceiptCreate />}
+                  />
+                  <Route
+                    path="view/:id"
+                    element={<InventoryReceiptViewProcurementOfficer />}
+                  />
+                  <Route
+                    path="update/:id"
+                    element={<InventoryReceiptUpdate />}
+                  />
+                </Route>
+                <Route element={<ProtectedRoute role="vendor" />}>
+                  <Route
+                    path="vendor-list"
+                    element={<InventoryReceiptListVendor />}
+                  />
+                  <Route
+                    path="vendor-view/:id"
+                    element={<InventoryReceiptViewVendor />}
+                  />
+                </Route>
+              </Route>
+              <Route path="invoice">
+                <Route element={<ProtectedRoute role="procurement_officer" />}>
+                  <Route
+                    path="procurement-officer-list/"
+                    element={<InvoiceListProcurementOfficer />}
+                  />
+                  <Route
+                    path="procurement-officer-view/:id"
+                    element={<InvoiceViewProcurementOfficer />}
+                  />
+                  <Route
+                    path="vendor-rating/:id"
+                    element={<InvoiceVendorRating />}
+                  />
+                </Route>
+                <Route element={<ProtectedRoute role="vendor" />}>
+                  <Route
+                    path="list"
+                    element={<InvoiceListVendor />}
+                  />
+                  <Route
+                    path="create/:order_id"
+                    element={<InvoiceCreate />}
+                  />
+                  <Route
+                    path="view/:id"
+                    element={<InvoiceViewVendor />}
+                  />
+                  <Route
+                    path="update/:id"
+                    element={<InvoiceUpdate />}
+                  />
+                </Route>
+              </Route>
+            </Route>
             <Route path="dashboard">
               <Route element={<ProtectedRoute role="admin" />}>
                 <Route path="admin" element={<AdminDashboard />} />
@@ -158,10 +237,7 @@ function App() {
                 />
               </Route>
               <Route element={<ProtectedRoute role="vendor" />}>
-                <Route
-                  path="vendor"
-                  element={<VendorDashboard />}
-                />
+                <Route path="vendor" element={<VendorDashboard />} />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />

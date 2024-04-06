@@ -88,13 +88,13 @@ const PurchaseOrderListVendor = () => {
   };
 
   const getActions = (value, navigate, handleShipped, handleDelivered) => [
-    {
-      label: "View",
-      action: () =>
-        navigate(`/purchase/bid/procurement-officer-view/${value}/`),
-    },
     { label: "Shipped", action: () => handleShipped(value) },
     { label: "Delivered", action: () => handleDelivered(value) },
+    {
+      label: "Create Invoice",
+      action: () =>
+        navigate(`/logistics/invoice/create/${value}/`),
+    },
   ];
 
   const columns = useMemo(

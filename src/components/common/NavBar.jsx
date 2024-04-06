@@ -26,6 +26,8 @@ export default function NavBar() {
     { name: "Inventory", link: "/inventory/list" },
     { name: "Requisitions", link: "/purchase/requisition/list" },
     { name: "Orders", link: "/purchase/order/list" },
+    { name: "Inventory Receipts", link: "/logistics/inventory-receipt/list" },
+    { name: "Invoices", link: "/logistics/invoice/procurement-officer-list" },
     { name: "Dashboard", link: "/dashboard/procurement-officer" },
   ];
 
@@ -34,6 +36,11 @@ export default function NavBar() {
     { name: "Requisitions", link: "/purchase/requisition/vendor-list" },
     { name: "Bids", link: "/purchase/bid/list" },
     { name: "Orders", link: "/purchase/order/vendor-list" },
+    {
+      name: "Inventory Receipts",
+      link: "/logistics/inventory-receipt/vendor-list",
+    },
+    { name: "Invoices", link: "/logistics/invoice/list" },
     { name: "Dashboard", link: "/dashboard/vendor" },
   ];
 

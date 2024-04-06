@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router";
+import { HiOutlineDocumentReport } from "react-icons/hi";
 import useAxios from "../../../utils/useAxios";
 import Table from "../../../components/tables/Table";
 import Toast from "../../../components/common/Toast";
@@ -7,38 +8,29 @@ import LoadingSpinner from "../../../components/common/LoadingSpinner";
 import ActionsCell from "../../../components/tables/ActionsCell";
 import StatusPill from "../../../components/tables/StatusPill";
 
-const PurchaseOrderListProcurementOfficer = () => {
+const InventoryReceiptListVendor = () => {
   const baseURL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const api = useAxios();
   const [isLoading, setIsLoading] = useState(false);
-  const [orders, setOrders] = useState([]);
+  const [receipts, setReceipts] = useState([]);
 
-  const getActions = (value, navigate) => [
+  const getActions = (value, navigate, handleDelete) => [
     {
-      label: "Create Inventory Receipt",
-      action: () =>
-        navigate(`/logistics/inventory-receipt/create/${value}/`),
+      label: "View",
+      action: () => navigate(`/logistics/inventory-receipt/vendor-view/${value}/`),
     },
   ];
 
   const columns = useMemo(
     () => [
-    {
-        Header: "Order ID",
-        accessor: "order_number",
-    },
       {
-        Header: "Quantity Ordered",
-        accessor: "quantity_ordered",
+        Header: "Receipt ID",
+        accessor: "receipt_id",
       },
       {
-        Header: "Unit Price",
-        accessor: "unit_price",
-      },
-      {
-        Header: "Expected Date of Delivery",
-        accessor: "expected_delivery_date",
+        Header: "Receipt Date",
+        accessor: "receipt_date",
         Cell: ({ value }) => (
           <span className="text-sm text-gray-500">
             {new Date(value).toLocaleDateString()}
@@ -46,40 +38,51 @@ const PurchaseOrderListProcurementOfficer = () => {
         ),
       },
       {
-        Header: "Date Ordered",
-        accessor: "date_ordered",
-        Cell: ({ value }) => (
-          <span className="text-sm text-gray-500">
-            {new Date(value).toLocaleDateString()}
-          </span>
-        ),
+        Header: "Quantity Received",
+        accessor: "received_quantity",
       },
       {
-        Header: "Delivery Location",
-        accessor: "delivery_location",
+        Header: "Inspection Notes",
+        accessor: "inspection_notes",
+        show: false,
       },
       {
-        Header: "Status",
-        accessor: "status",
+        Header: "Received Condition",
+        accessor: "received_condition",
         Cell: ({ value }) => (
           <StatusPill
             value={value}
             colorMap={{
-              delivered: {
+              good: {
                 backgroundColor: "bg-green-100",
                 textColor: "text-green-800",
               },
-              shipped: {
-                backgroundColor: "bg-yellow-100",
-                textColor: "text-yellow-800",
+              damaged: {
+                backgroundColor: "bg-red-100",
+                textColor: "text-red-800",
               },
-              pending: {
+              defective: {
                 backgroundColor: "bg-red-100",
                 textColor: "text-red-800",
               },
             }}
           />
         ),
+      },
+      {
+        Header: "Inspection Report",
+        accessor: "inspection_report",
+        Cell: ({ value }) =>
+          value && (
+            <a
+              href={value}
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-500"
+            >
+              <HiOutlineDocumentReport className="text-xl" />
+            </a>
+          ),
       },
       {
         Header: "Actions",
@@ -101,14 +104,14 @@ const PurchaseOrderListProcurementOfficer = () => {
       setIsLoading(true);
       try {
         const response = await api.get(
-          `${baseURL}/purchase/purchase-orders/list/`,
+          `${baseURL}/logistics/inventory-receipt/vendor/list/`,
         );
-        setOrders(response.data);
+        setReceipts(response.data);
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        console.error("Error fetching receipts:", error);
         Toast.fire({
           icon: "error",
-          title: "Error fetching orders!",
+          title: "Error fetching receipts!",
         });
       } finally {
         setIsLoading(false);
@@ -118,21 +121,17 @@ const PurchaseOrderListProcurementOfficer = () => {
     fetchOrders();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const data = orders;
+  const data = receipts;
 
   return (
     <>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <Table
-          data={data}
-          columns={columns}
-          title="Purchase Orders Table"
-        />
+        <Table data={data} columns={columns} title="Inventory Receipts Table" />
       )}
     </>
   );
 };
 
-export default PurchaseOrderListProcurementOfficer;
+export default InventoryReceiptListVendor;
